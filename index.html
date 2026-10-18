@@ -5,119 +5,155 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studio Evolution Tech · Sites que vendem pelo WhatsApp</title>
-    <meta name="description" content="Sites e catálogos bonitos no celular, que vendem direto pelo WhatsApp. Feitos sob medida pra pequenos negócios. A partir de R$ 399.">
-    <!-- Prévia quando o link é compartilhado no WhatsApp/Instagram -->
+    <meta name="description" content="Sites, lojas e catálogos bonitos no celular, que vendem direto pelo WhatsApp. Feitos sob medida pra pequenos negócios. A partir de R$ 399.">
     <meta property="og:title" content="Studio Evolution Tech · Seu negócio no próximo nível">
     <meta property="og:description" content="Sites e catálogos que vendem pelo WhatsApp. A partir de R$ 399.">
+    <meta name="theme-color" content="#050B1F">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='38' width='13' height='20' rx='3.5' fill='%2393C5FD'/%3E%3Crect x='25.5' y='26' width='13' height='32' rx='3.5' fill='%232563EB'/%3E%3Cpath d='M45 58V16l6.5-10L58 16v42z' fill='%2322D3EE'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css?v=2">
 
     <style>
         /* ===== CAPA ===== */
-        .capa {
-            background: radial-gradient(circle at 80% 20%, #16316F 0%, var(--fundo) 55%);
-            color: #FFFFFF; padding: 150px 0 90px; position: relative; overflow: hidden;
-        }
-        .capa .container { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: center; }
-        .capa .etiqueta { color: var(--ciano); }
-        .capa h1 { font-size: clamp(40px, 6.4vw, 76px); font-weight: 800; line-height: 1.02; letter-spacing: -0.03em; margin: 14px 0 22px; }
-        .capa h1 em { font-style: normal; color: var(--ciano); }
-        .capa p { color: #C9D8F5; font-size: 18px; max-width: 520px; margin: 0 0 34px; }
+        .capa { min-height: 100vh; display: flex; align-items: center; padding: 130px 0 90px; overflow: hidden; }
+        .capa .container { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 50px; align-items: center; }
+        .capa h1 { font-size: clamp(42px, 6.6vw, 84px); font-weight: 800; line-height: 1; letter-spacing: -0.04em; margin: 22px 0 22px; }
+        .capa .linha-digitar { font-family: var(--mono); font-size: clamp(15px, 1.6vw, 18px); color: var(--claro); margin: 0 0 18px; }
+        .capa .linha-digitar b { color: #FFFFFF; font-weight: 500; }
+        .capa .linha-digitar b::after { content: "▍"; color: var(--ciano); animation: piscar 1s steps(1) infinite; margin-left: 2px; }
+        .capa p.desc { color: var(--cinza); font-size: 18px; max-width: 540px; margin: 0 0 34px; }
         .acoes { display: flex; flex-wrap: wrap; gap: 14px; }
-        .provas { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 34px; font-size: 13px; color: #9FB4DB; }
-        .provas b { color: #FFFFFF; }
+        .numeros { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 40px; }
+        .numeros .vidro { padding: 14px 18px; border-radius: 16px; }
+        .numeros b { display: block; font-size: 24px; font-weight: 800; color: #FFFFFF; font-variant-numeric: tabular-nums; }
+        .numeros span { font-size: 12px; color: var(--cinza); font-family: var(--mono); }
 
-        /* Os degraus do símbolo, crescendo quando a página abre */
-        .degraus { display: flex; align-items: flex-end; justify-content: center; gap: 22px; height: 380px; }
-        .degraus i { display: block; width: 92px; border-radius: 22px; transform-origin: bottom; animation: crescer 1.1s cubic-bezier(.2, .8, .2, 1) both; }
-        .degraus i:nth-child(1) { height: 36%; background: #1E3A8A; }
-        .degraus i:nth-child(2) { height: 62%; background: var(--azul2); animation-delay: .15s; }
-        .degraus svg { width: 92px; height: 100%; animation: crescer 1.1s cubic-bezier(.2, .8, .2, 1) .3s both, flutuar 4s ease-in-out 1.5s infinite; transform-origin: bottom; }
-        @keyframes crescer { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
-        @keyframes flutuar { 50% { transform: translateY(-10px); } }
+        /* O símbolo gigante, com anéis em órbita e terminal flutuante */
+        .palco { position: relative; height: 560px; display: grid; place-items: center; }
+        .orbita { position: absolute; border-radius: 50%; border: 1px solid rgba(34, 211, 238, .18); }
+        .orbita.o1 { width: 420px; height: 420px; animation: orbitar 18s linear infinite; }
+        .orbita.o2 { width: 540px; height: 540px; border-style: dashed; border-color: rgba(147, 197, 253, .14); animation: orbitar 30s linear infinite reverse; }
+        .orbita i { position: absolute; top: -5px; left: 50%; width: 10px; height: 10px; border-radius: 50%; background: var(--ciano); box-shadow: 0 0 16px var(--ciano); }
+        .orbita.o2 i { background: var(--roxo); box-shadow: 0 0 16px var(--roxo); top: auto; bottom: -5px; }
+        @keyframes orbitar { to { transform: rotate(360deg); } }
+        .simbolo { position: relative; display: flex; align-items: flex-end; gap: 22px; height: 300px; filter: drop-shadow(0 0 30px rgba(34, 211, 238, .35)); }
+        .simbolo i { width: 76px; border-radius: 20px; transform-origin: bottom; animation: crescer 1.2s cubic-bezier(.2, .8, .2, 1) both; position: relative; overflow: hidden; }
+        .simbolo i:nth-child(1) { height: 36%; background: linear-gradient(180deg, #2E4FB0, #1E3A8A); }
+        .simbolo i:nth-child(2) { height: 62%; background: linear-gradient(180deg, #60A5FA, #2563EB); animation-delay: .15s; }
+        .simbolo svg { width: 76px; height: 100%; transform-origin: bottom; animation: crescer 1.2s cubic-bezier(.2, .8, .2, 1) .3s both, flutuar 4s ease-in-out 1.6s infinite; }
+        .simbolo i::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent, rgba(255, 255, 255, .35), transparent); transform: translateY(-100%); animation: escanear 3s ease-in-out 1.5s infinite; }
+        @keyframes escanear { 60%, 100% { transform: translateY(100%); } }
+        @keyframes crescer { from { transform: scaleY(0); opacity: 0; } }
+        @keyframes flutuar { 50% { transform: translateY(-12px); } }
+        .terminal { position: absolute; left: -40px; bottom: -10px; width: 300px; padding: 0; border-radius: 16px; font-family: var(--mono); font-size: 12.5px; animation: boiar 6s ease-in-out infinite; }
+        .terminal .barra { display: flex; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--linha); }
+        .terminal .barra i { width: 9px; height: 9px; border-radius: 50%; background: #FF5F57; }
+        .terminal .barra i:nth-child(2) { background: #FEBC2E; } .terminal .barra i:nth-child(3) { background: #28C840; }
+        .terminal pre { margin: 0; padding: 12px 14px 14px; min-height: 150px; white-space: pre-wrap; color: var(--claro); }
+        .terminal .k { color: var(--roxo); } .terminal .s { color: #A5F3FC; } .terminal .c { color: #5B6B8C; } .terminal .ok { color: #4ADE80; }
+        .chip { position: absolute; padding: 10px 14px; border-radius: 14px; font-size: 13px; font-weight: 600; display: flex; gap: 8px; align-items: center; animation: boiar 5s ease-in-out infinite; }
+        .chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: #4ADE80; box-shadow: 0 0 10px #4ADE80; }
+        .chip.c1 { right: 0; top: 70px; animation-delay: -1s; }
+        .chip.c2 { right: 30px; bottom: 90px; animation-delay: -2.5s; }
+        .chip.c3 { left: 20px; top: 40px; animation-delay: -3.5s; }
+        @keyframes boiar { 50% { transform: translateY(-14px); } }
 
-        /* ===== SERVIÇOS ===== */
+        /* ===== FAIXA DE TECNOLOGIAS ===== */
+        .faixa-tech { border-block: 1px solid var(--linha); background: rgba(10, 20, 48, .5); overflow: hidden; padding: 18px 0; position: relative; z-index: 2; }
+        .faixa-tech .trilho { display: flex; gap: 46px; width: max-content; animation: correr 28s linear infinite; font-family: var(--mono); font-size: 14px; color: var(--cinza); }
+        .faixa-tech span::before { content: "◆ "; color: var(--ciano); }
+        @keyframes correr { to { transform: translateX(-50%); } }
+
+        /* ===== PACOTES ===== */
         .pacotes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-        .pacote {
-            position: relative; display: flex; flex-direction: column; gap: 10px;
-            padding: 26px 22px; border-radius: 20px; background: var(--gelo); border: 1.5px solid var(--linha);
-            transition: transform .25s, border-color .25s, box-shadow .25s;
-        }
-        .pacote:hover { transform: translateY(-6px); border-color: var(--azul); box-shadow: 0 18px 40px rgba(37, 99, 235, 0.15); }
-        .pacote.destaque { background: var(--fundo); color: #FFFFFF; border-color: var(--fundo); }
-        .pacote.destaque p, .pacote.destaque li { color: #C9D8F5; }
-        .pacote .selo { position: absolute; top: -12px; left: 22px; background: var(--ciano); color: var(--fundo); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 999px; }
-        .pacote h3 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: .04em; }
-        .pacote .para { margin: 0; font-size: 13px; color: var(--cinza); min-height: 42px; }
-        .pacote .preco { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; }
-        .pacote.destaque .preco { color: var(--ciano); }
-        .pacote ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--cinza); display: grid; gap: 6px; flex: 1; }
-        .pacote .botao { margin-top: 8px; padding: 12px 18px; font-size: 14px; }
-        .extras { margin-top: 26px; font-size: 14px; color: var(--cinza); }
+        .pacote { display: flex; flex-direction: column; gap: 12px; padding: 28px 24px; }
+        .pacote .nome { font-family: var(--mono); font-size: 13px; letter-spacing: .2em; color: var(--ciano); }
+        .pacote .para { margin: 0; font-size: 14px; color: var(--cinza); min-height: 44px; }
+        .pacote .preco { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; color: #FFFFFF; }
+        .pacote .preco small { font-size: 14px; color: var(--cinza); font-weight: 400; }
+        .pacote ul { margin: 0; padding: 0; list-style: none; font-size: 14px; color: var(--cinza); display: grid; gap: 9px; flex: 1; }
+        .pacote li::before { content: "✓"; color: var(--ciano); margin-right: 10px; font-weight: 700; }
+        .pacote .botao { margin-top: 10px; width: 100%; }
+        .pacote.destaque { border-color: rgba(34, 211, 238, .55); background: linear-gradient(180deg, rgba(34, 211, 238, .1), rgba(37, 99, 235, .06)); box-shadow: 0 0 60px rgba(34, 211, 238, .15); }
+        .pacote .selo { position: absolute; top: 16px; right: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: #04112B; background: var(--ciano); padding: 4px 10px; border-radius: 999px; box-shadow: 0 0 16px rgba(34, 211, 238, .6); }
+        .extras { margin-top: 28px; font-size: 14px; color: var(--cinza); }
 
-        /* ===== PORTFÓLIO ===== */
-        .portfolio { background: var(--gelo); }
-        .case { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 50px; align-items: center; }
-        .case-fotos { position: relative; height: 520px; }
-        .case-fotos img { position: absolute; border-radius: 22px; object-fit: cover; box-shadow: 0 24px 50px rgba(11, 30, 74, 0.25); }
-        .case-fotos .f1 { width: 78%; height: 78%; left: 0; top: 0; }
-        .case-fotos .f2 { width: 44%; height: 58%; right: 0; bottom: 0; border: 6px solid #FFFFFF; }
-        .case h3 { font-size: 30px; margin: 6px 0 12px; font-weight: 800; }
-        .case ul { padding: 0; list-style: none; display: grid; gap: 12px; margin: 22px 0 30px; }
-        .case li { display: flex; gap: 12px; align-items: flex-start; }
-        .case li::before { content: ""; flex: 0 0 10px; height: 10px; margin-top: 8px; border-radius: 3px; background: var(--ciano); }
+        /* ===== PORTFÓLIO: o site rodando dentro de um navegador ===== */
+        .cases { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px; }
+        .case { padding: 18px; }
+        .navegador { border-radius: 14px; overflow: hidden; border: 1px solid var(--linha); background: #0A1430; }
+        .navegador .barra { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--linha); }
+        .navegador .barra i { width: 9px; height: 9px; border-radius: 50%; background: #FF5F57; }
+        .navegador .barra i:nth-child(2) { background: #FEBC2E; } .navegador .barra i:nth-child(3) { background: #28C840; }
+        .navegador .barra span { margin-left: 10px; flex: 1; font-family: var(--mono); font-size: 11px; color: var(--cinza); background: rgba(255, 255, 255, .05); padding: 5px 10px; border-radius: 8px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+        .navegador .janela { position: relative; height: 340px; overflow: hidden; }
+        .navegador iframe { position: absolute; top: 0; left: 0; width: 1280px; height: 1000px; border: 0; transform: scale(.42); transform-origin: 0 0; pointer-events: none; }
+        .case h3 { font-size: 26px; font-weight: 800; margin: 20px 4px 6px; }
+        .case p { color: var(--cinza); margin: 0 4px 16px; font-size: 15px; }
+        .case .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 4px 18px; }
+        .case .tags span { font-family: var(--mono); font-size: 11px; color: var(--claro); border: 1px solid var(--linha); padding: 4px 10px; border-radius: 999px; }
+        .case .botao { margin: 0 4px 6px; }
 
-        /* ===== COMO FUNCIONA ===== */
-        .passos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; counter-reset: passo; list-style: none; padding: 0; margin: 0; }
-        .passos li { padding: 22px 18px; border-radius: 18px; border: 1.5px solid var(--linha); counter-increment: passo; }
-        .passos li::before { content: "0" counter(passo); display: block; font-size: 26px; font-weight: 800; color: var(--azul); margin-bottom: 8px; }
-        .passos b { display: block; margin-bottom: 4px; }
-        .passos p { margin: 0; font-size: 13.5px; color: var(--cinza); }
+        /* ===== COMO FUNCIONA: linha do tempo que acende ===== */
+        .linha-tempo { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; list-style: none; padding: 0; margin: 0; counter-reset: passo; }
+        .linha-tempo::before { content: ""; position: absolute; left: 4%; right: 4%; top: 28px; height: 2px; background: linear-gradient(90deg, var(--ciano), var(--azul2), var(--roxo)); box-shadow: 0 0 14px rgba(34, 211, 238, .6); transform-origin: left; transform: scaleX(0); transition: transform 1.8s cubic-bezier(.2, .8, .2, 1); }
+        .linha-tempo.visto::before { transform: scaleX(1); }
+        .linha-tempo li { counter-increment: passo; position: relative; text-align: center; padding: 0 6px; }
+        .linha-tempo li::before { content: "0" counter(passo); display: grid; place-items: center; width: 58px; height: 58px; margin: 0 auto 18px; border-radius: 50%; background: var(--fundo); border: 1.5px solid var(--ciano); box-shadow: 0 0 20px rgba(34, 211, 238, .45); font-family: var(--mono); font-weight: 500; color: var(--ciano); position: relative; z-index: 1; }
+        .linha-tempo b { display: block; margin-bottom: 6px; font-size: 17px; }
+        .linha-tempo p { margin: 0; font-size: 14px; color: var(--cinza); }
 
         /* ===== CONFIANÇA ===== */
-        .confianca { background: var(--fundo); color: #FFFFFF; }
-        .confianca .etiqueta { color: var(--ciano); }
-        .confianca .sub { color: #C9D8F5; }
         .garantias { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
-        .garantia { padding: 24px; border-radius: 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .garantia b { display: block; font-size: 17px; margin-bottom: 6px; color: var(--ciano); }
-        .garantia p { margin: 0; font-size: 14px; color: #C9D8F5; }
+        .garantia { padding: 28px 24px; }
+        .garantia svg { width: 34px; height: 34px; color: var(--ciano); filter: drop-shadow(0 0 8px rgba(34, 211, 238, .6)); margin-bottom: 14px; }
+        .garantia b { display: block; font-size: 18px; margin-bottom: 6px; }
+        .garantia p { margin: 0; font-size: 14px; color: var(--cinza); }
 
         /* ===== PERGUNTAS ===== */
-        .faq { display: grid; gap: 12px; max-width: 780px; }
-        .faq details { border: 1.5px solid var(--linha); border-radius: 16px; padding: 18px 22px; }
+        .faq { display: grid; gap: 12px; max-width: 820px; }
+        .faq details { padding: 20px 24px; }
         .faq summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
-        .faq summary::after { content: "+"; color: var(--azul); font-size: 22px; line-height: 1; }
-        .faq details[open] summary::after { content: "–"; }
+        .faq summary::-webkit-details-marker { display: none; }
+        .faq summary::after { content: "+"; font-family: var(--mono); color: var(--ciano); font-size: 22px; line-height: 1; transition: transform .3s; }
+        .faq details[open] summary::after { transform: rotate(45deg); }
         .faq p { margin: 12px 0 0; color: var(--cinza); }
 
         /* ===== CHAMADA FINAL ===== */
-        .final { text-align: center; background: linear-gradient(180deg, #FFFFFF, var(--gelo)); }
-        .final h2 { max-width: 700px; margin-inline: auto; }
+        .final { text-align: center; }
+        .final .caixa { padding: 70px 30px; border-radius: 30px; background: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, .2), transparent 60%), rgba(10, 20, 48, .6); }
+        .final h2 { max-width: 760px; margin-inline: auto; }
+        .final .sub { margin-inline: auto; }
         .final .acoes { justify-content: center; }
 
-        /* ===== CELULAR ===== */
-        @media (max-width: 980px) {
+        @media (max-width: 1000px) {
             .pacotes, .garantias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .linha-tempo { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 34px; }
+            .linha-tempo::before { display: none; }
         }
-        @media (max-width: 760px) {
-            .capa { padding: 120px 0 70px; }
-            .capa .container, .case { grid-template-columns: minmax(0, 1fr); }
-            .degraus { height: 220px; gap: 14px; }
-            .degraus i, .degraus svg { width: 60px; }
-            .case-fotos { height: 380px; }
+        @media (max-width: 860px) {
+            .capa .container, .cases { grid-template-columns: minmax(0, 1fr); }
+            .palco { height: 440px; }
+            .orbita.o1 { width: 320px; height: 320px; } .orbita.o2 { width: 400px; height: 400px; }
+            .simbolo { height: 220px; gap: 14px; } .simbolo i, .simbolo svg { width: 56px; }
+            .terminal { width: 250px; font-size: 11px; left: 0; bottom: 0; }
+            .navegador .janela { height: 260px; }
+            .navegador iframe { transform: scale(.3); }
         }
         @media (max-width: 520px) {
-            .pacotes, .garantias, .passos { grid-template-columns: minmax(0, 1fr); }
+            .pacotes, .garantias, .linha-tempo { grid-template-columns: minmax(0, 1fr); }
+            .chip.c3 { display: none; }
         }
     </style>
 </head>
 
 <body>
+    <canvas id="rede" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="ruido" aria-hidden="true"></div>
+    <div class="cursor-luz" aria-hidden="true"></div>
 
     <!-- ===== TOPO ===== -->
     <header class="topo">
@@ -132,7 +168,7 @@
                 <a href="#como-funciona">Como funciona</a>
                 <a href="#perguntas">Dúvidas</a>
             </nav>
-            <a class="botao botao-ciano" href="orcamento.html">Orçamento<span>&nbsp;grátis</span></a>
+            <a class="botao botao-ciano" href="orcamento.html"><b>Orçamento</b><span>&nbsp;grátis</span></a>
         </div>
     </header>
 
@@ -141,109 +177,107 @@
         <section class="capa" id="inicio">
             <div class="container">
                 <div>
-                    <span class="etiqueta">Sites para pequenos negócios</span>
-                    <h1>Seu negócio no próximo <em>nível.</em></h1>
-                    <p>Sites e catálogos bonitos no celular, que levam o cliente direto pro seu WhatsApp. Feitos sob medida, com atendimento de gente de verdade.</p>
-                    <div class="acoes">
-                        <a class="botao botao-ciano" href="orcamento.html">Monte seu orçamento</a>
-                        <a class="botao botao-contorno" href="https://wa.me/5527999998911?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Studio%20Evolution%20Tech%20e%20quero%20conversar%20sobre%20um%20site." target="_blank" rel="noopener">Falar no WhatsApp</a>
+                    <span class="etiqueta revelar">Estúdio de sites · ES e todo o Brasil</span>
+                    <h1 class="revelar" data-atraso=".1">Seu negócio no <span class="grad">próximo nível.</span></h1>
+                    <p class="linha-digitar revelar" data-atraso=".2">&gt; criamos <b data-digitar="sites que vendem|lojas virtuais|catálogos no celular|páginas de lançamento">sites que vendem</b></p>
+                    <p class="desc revelar" data-atraso=".3">Sites bonitos no celular, que levam o cliente direto pro seu WhatsApp. Feitos sob medida, com atendimento de gente de verdade.</p>
+                    <div class="acoes revelar" data-atraso=".4">
+                        <a class="botao botao-ciano" href="orcamento.html"><b>Monte seu orçamento</b><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a class="botao botao-contorno" href="https://wa.me/5527999998911?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Studio%20Evolution%20Tech%20e%20quero%20conversar%20sobre%20um%20site." target="_blank" rel="noopener"><b>Falar no WhatsApp</b></a>
                     </div>
-                    <div class="provas">
-                        <span><b>A partir de R$ 399</b></span>
-                        <span><b>50%</b> na contratação · <b>50%</b> na entrega</span>
-                        <span>Feito pra <b>celular</b></span>
+                    <div class="numeros revelar" data-atraso=".5">
+                        <div class="vidro"><b data-contar="399" data-pre="R$ ">R$ 399</b><span>a partir de</span></div>
+                        <div class="vidro"><b>50/50</b><span>entrada e entrega</span></div>
+                        <div class="vidro"><b data-contar="100" data-suf="%">100%</b><span>feito pra celular</span></div>
                     </div>
                 </div>
-                <div class="degraus" aria-hidden="true">
-                    <i></i><i></i>
-                    <svg viewBox="0 0 92 380" preserveAspectRatio="none"><path d="M0 380V90L46 0l46 90v290z" fill="#22D3EE"/></svg>
+                <div class="palco" aria-hidden="true">
+                    <div class="orbita o1"><i></i></div>
+                    <div class="orbita o2"><i></i></div>
+                    <div class="simbolo"><i></i><i></i><svg viewBox="0 0 92 380" preserveAspectRatio="none"><defs><linearGradient id="seta-g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#67E8F9"/><stop offset="1" stop-color="#06B6D4"/></linearGradient></defs><path d="M0 380V90L46 0l46 90v290z" fill="url(#seta-g)"/></svg></div>
+                    <div class="vidro terminal"><div class="barra"><i></i><i></i><i></i></div>
+                        <pre id="codigo" data-linhas='<span class="c">// seu site, do zero ao ar</span>
+<span class="k">const</span> site = <span class="s">"sua-marca"</span>;
+site.<span class="k">celular</span>(<span class="ok">true</span>);
+site.<span class="k">whatsapp</span>(<span class="s">"comprar"</span>);
+site.<span class="k">google</span>(<span class="ok">true</span>);
+<span class="ok">✓ publicado com sucesso</span>'></pre></div>
+                    <div class="vidro chip c1">WhatsApp conectado</div>
+                    <div class="vidro chip c2">Pedido recebido</div>
+                    <div class="vidro chip c3">Rápido no celular</div>
                 </div>
             </div>
         </section>
+
+        <div class="faixa-tech" aria-hidden="true"><div class="trilho">
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Botão de WhatsApp</span><span>Google</span><span>Instagram</span><span>Pix e cartão</span><span>Feito pra celular</span><span>Música no site</span><span>Vitrine 360°</span>
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Botão de WhatsApp</span><span>Google</span><span>Instagram</span><span>Pix e cartão</span><span>Feito pra celular</span><span>Música no site</span><span>Vitrine 360°</span>
+        </div></div>
 
         <!-- ===== SERVIÇOS ===== -->
         <section id="servicos">
             <div class="container">
-                <span class="etiqueta">Serviços</span>
-                <h2>Um pacote pra cada momento do seu negócio</h2>
-                <p class="sub">Preço fechado, prazo combinado e tudo escrito antes de começar. Você escolhe o pacote e acrescenta o que quiser.</p>
+                <span class="etiqueta revelar">Serviços</span>
+                <h2 class="revelar">Um pacote pra cada <span class="grad">momento</span> do seu negócio</h2>
+                <p class="sub revelar">Preço fechado, prazo combinado e tudo escrito antes de começar. Você escolhe o pacote e acrescenta o que quiser.</p>
                 <div class="pacotes">
-                    <article class="pacote">
-                        <h3>START</h3>
+                    <article class="pacote vidro revelar" data-inclinar>
+                        <span class="nome">START</span>
                         <p class="para">Pra quem só precisa estar na internet</p>
                         <span class="preco">R$ 399</span>
-                        <ul>
-                            <li>Página simples, até 3 seções</li>
-                            <li>Botão de WhatsApp</li>
-                            <li>Localização e redes</li>
-                            <li>Versão pra celular</li>
-                            <li>1 rodada de revisão</li>
-                        </ul>
-                        <a class="botao botao-azul" href="orcamento.html?pacote=start">Escolher</a>
+                        <ul><li>Página simples, até 3 seções</li><li>Botão de WhatsApp</li><li>Localização e redes</li><li>Versão pra celular</li><li>1 rodada de revisão</li></ul>
+                        <a class="botao botao-azul" href="orcamento.html?pacote=start"><b>Escolher</b></a>
                     </article>
-                    <article class="pacote">
-                        <h3>ESSENCIAL</h3>
+                    <article class="pacote vidro revelar" data-inclinar data-atraso=".1">
+                        <span class="nome">ESSENCIAL</span>
                         <p class="para">Apresentação profissional do seu negócio</p>
                         <span class="preco">R$ 699</span>
-                        <ul>
-                            <li>Tudo do Start</li>
-                            <li>Visual personalizado, até 5 seções</li>
-                            <li>Galeria de fotos</li>
-                            <li>Formulário de contato</li>
-                            <li>Aparecer no Google (SEO básico)</li>
-                        </ul>
-                        <a class="botao botao-azul" href="orcamento.html?pacote=essencial">Escolher</a>
+                        <ul><li>Tudo do Start</li><li>Visual personalizado, até 5 seções</li><li>Galeria de fotos</li><li>Formulário de contato</li><li>Aparecer no Google</li></ul>
+                        <a class="botao botao-azul" href="orcamento.html?pacote=essencial"><b>Escolher</b></a>
                     </article>
-                    <article class="pacote destaque">
-                        <span class="selo">Mais escolhido por lojas</span>
-                        <h3>BUSINESS</h3>
+                    <article class="pacote vidro destaque revelar" data-inclinar data-atraso=".2">
+                        <span class="selo">MAIS ESCOLHIDO</span>
+                        <span class="nome">BUSINESS</span>
                         <p class="para">Catálogo que vende pelo WhatsApp</p>
                         <span class="preco">R$ 999</span>
-                        <ul>
-                            <li>Tudo do Essencial</li>
-                            <li>Catálogo de até 12 produtos</li>
-                            <li>Botão COMPRAR em cada produto</li>
-                            <li>Efeitos e categorias</li>
-                            <li>2 rodadas de revisão</li>
-                        </ul>
-                        <a class="botao botao-ciano" href="orcamento.html?pacote=business">Escolher</a>
+                        <ul><li>Tudo do Essencial</li><li>Catálogo de até 12 produtos</li><li>Botão COMPRAR em cada produto</li><li>Efeitos e categorias</li><li>2 rodadas de revisão</li></ul>
+                        <a class="botao botao-ciano" href="orcamento.html?pacote=business"><b>Escolher</b></a>
                     </article>
-                    <article class="pacote">
-                        <h3>PREMIUM</h3>
+                    <article class="pacote vidro revelar" data-inclinar data-atraso=".3">
+                        <span class="nome">PREMIUM</span>
                         <p class="para">Experiência de marca completa</p>
                         <span class="preco">R$ 1.599</span>
-                        <ul>
-                            <li>Tudo do Business</li>
-                            <li>Até 25 produtos</li>
-                            <li>Identidade visual caprichada</li>
-                            <li>Animações e banner de destaque</li>
-                            <li>3 rodadas de revisão</li>
-                        </ul>
-                        <a class="botao botao-azul" href="orcamento.html?pacote=premium">Escolher</a>
+                        <ul><li>Tudo do Business</li><li>Até 25 produtos</li><li>Identidade visual caprichada</li><li>Animações e banner de destaque</li><li>3 rodadas de revisão</li></ul>
+                        <a class="botao botao-azul" href="orcamento.html?pacote=premium"><b>Escolher</b></a>
                     </article>
                 </div>
-                <p class="extras">Também fazemos: domínio próprio (seunegocio.com.br), mapa do Google, página de promoção, tratamento de fotos e manutenção mensal a partir de R$ 59/mês. <a href="orcamento.html">Ver todos os extras</a></p>
+                <p class="extras revelar">Também fazemos: domínio próprio (seunegocio.com.br), mapa do Google, página de promoção, tratamento de fotos e manutenção mensal a partir de R$ 59/mês. <a href="orcamento.html">Ver todos os extras →</a></p>
             </div>
         </section>
 
         <!-- ===== PORTFÓLIO ===== -->
-        <section class="portfolio" id="portfolio">
-            <div class="container case">
-                <div class="case-fotos">
-                    <img class="f1" src="https://arnoldsuheth.github.io/Blessaint/img/blessaint-capa-hd.jpg" alt="Capa do site da BLESSAINT com casal vestindo a marca">
-                    <img class="f2" src="https://arnoldsuheth.github.io/Blessaint/img/freedom-lilas-frente.jpg" alt="Camiseta Freedom lilás no catálogo da BLESSAINT">
-                </div>
-                <div>
-                    <span class="etiqueta">Case #01 · Loja de roupas</span>
-                    <h3>BLESSAINT</h3>
-                    <p class="sub" style="margin-bottom:0">Marca de streetwear com propósito que vendia só pelo Instagram. Ganhou uma vitrine própria, bonita no celular, que leva o cliente direto pra compra.</p>
-                    <ul>
-                        <li>Vitrine 360° que gira com o dedo</li>
-                        <li>Botão COMPRAR em cada peça, abrindo o WhatsApp com o nome do produto</li>
-                        <li>Selos de lançamento, disponível e esgotado</li>
-                        <li>Trilha sonora da marca tocando no site</li>
-                    </ul>
-                    <a class="botao botao-azul" href="https://arnoldsuheth.github.io/Blessaint/" target="_blank" rel="noopener">Ver o site ao vivo</a>
+        <section id="portfolio">
+            <div class="container">
+                <span class="etiqueta revelar">Portfólio</span>
+                <h2 class="revelar">Sites que já estão <span class="grad">no ar</span></h2>
+                <p class="sub revelar">Esses são sites de verdade, rodando ao vivo aqui dentro. Clique pra visitar.</p>
+                <div class="cases">
+                    <article class="case vidro revelar" data-inclinar>
+                        <div class="navegador"><div class="barra"><i></i><i></i><i></i><span>arnoldsuheth.github.io/Blessaint</span></div>
+                            <div class="janela"><iframe src="https://arnoldsuheth.github.io/Blessaint/" title="Site da BLESSAINT ao vivo" loading="lazy" tabindex="-1"></iframe></div></div>
+                        <h3>BLESSAINT</h3>
+                        <p>Marca de streetwear que vendia só pelo Instagram e ganhou uma vitrine própria que leva o cliente direto pra compra.</p>
+                        <div class="tags"><span>vitrine 360°</span><span>comprar no WhatsApp</span><span>música no site</span><span>selos de drop</span></div>
+                        <a class="botao botao-contorno" href="https://arnoldsuheth.github.io/Blessaint/" target="_blank" rel="noopener"><b>Ver ao vivo</b><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                    </article>
+                    <article class="case vidro revelar" data-inclinar data-atraso=".15">
+                        <div class="navegador"><div class="barra"><i></i><i></i><i></i><span>arnoldsuheth.github.io/ju-intimates</span></div>
+                            <div class="janela"><iframe src="https://arnoldsuheth.github.io/ju-intimates/" title="Site da Ju Intimates ao vivo" loading="lazy" tabindex="-1"></iframe></div></div>
+                        <h3>Ju Intimates</h3>
+                        <p>Loja de moda íntima com identidade completa: logo, catálogo com sacola, zoom nas fotos e pedido pronto no WhatsApp.</p>
+                        <div class="tags"><span>identidade visual</span><span>sacola de compras</span><span>zoom nas fotos</span><span>4 páginas</span></div>
+                        <a class="botao botao-contorno" href="https://arnoldsuheth.github.io/ju-intimates/" target="_blank" rel="noopener"><b>Ver ao vivo</b><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                    </article>
                 </div>
             </div>
         </section>
@@ -251,10 +285,10 @@
         <!-- ===== COMO FUNCIONA ===== -->
         <section id="como-funciona">
             <div class="container">
-                <span class="etiqueta">Como funciona</span>
-                <h2>Do orçamento ao site no ar, sem complicação</h2>
-                <p class="sub">Você acompanha cada etapa pelo WhatsApp e só paga a segunda parte quando o site estiver pronto.</p>
-                <ol class="passos">
+                <span class="etiqueta revelar">Como funciona</span>
+                <h2 class="revelar">Do orçamento ao site <span class="grad">no ar</span></h2>
+                <p class="sub revelar">Você acompanha cada etapa pelo WhatsApp e só paga a segunda parte quando o site estiver pronto.</p>
+                <ol class="linha-tempo revelar">
                     <li><b>Orçamento</b><p>Monte o seu em 1 minuto e envie pelo WhatsApp.</p></li>
                     <li><b>Conversa</b><p>Entendemos seu negócio, fotos, textos e estilo.</p></li>
                     <li><b>Proposta</b><p>Escopo e prazo por escrito. Entrada de 50%.</p></li>
@@ -265,16 +299,16 @@
         </section>
 
         <!-- ===== CONFIANÇA ===== -->
-        <section class="confianca">
+        <section>
             <div class="container">
-                <span class="etiqueta">Por que confiar</span>
-                <h2>Trabalho transparente, do começo ao fim</h2>
-                <p class="sub">Somos um estúdio novo e por isso mesmo cuidamos de cada cliente como se fosse o primeiro.</p>
+                <span class="etiqueta revelar">Por que confiar</span>
+                <h2 class="revelar">Trabalho <span class="grad">transparente</span>, do começo ao fim</h2>
+                <p class="sub revelar">Somos um estúdio novo, e por isso mesmo cuidamos de cada cliente como se fosse o primeiro.</p>
                 <div class="garantias">
-                    <div class="garantia"><b>Preço fechado</b><p>O valor do orçamento é o valor final. Sem surpresa no meio do caminho.</p></div>
-                    <div class="garantia"><b>Tudo por escrito</b><p>O que entra, o que não entra e o prazo ficam combinados antes de começar.</p></div>
-                    <div class="garantia"><b>Paga em 2 vezes</b><p>Metade pra começar, metade só quando você aprovar e o site estiver no ar.</p></div>
-                    <div class="garantia"><b>Gente de verdade</b><p>Atendimento humano pelo WhatsApp, sem robô e sem enrolação.</p></div>
+                    <div class="garantia vidro revelar"><svg viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8L3 12z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="7.5" cy="8.5" r="1.4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><b>Preço fechado</b><p>O valor do orçamento é o valor final. Sem surpresa no meio do caminho.</p></div>
+                    <div class="garantia vidro revelar" data-atraso=".1"><svg viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6zM14 3v5h5M9 13h7M9 17h5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><b>Tudo por escrito</b><p>O que entra, o que não entra e o prazo ficam combinados antes de começar.</p></div>
+                    <div class="garantia vidro revelar" data-atraso=".2"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 10h18M7 15h4" stroke="currentColor" stroke-width="1.5"/></svg><b>Paga em 2 vezes</b><p>Metade pra começar, metade só quando você aprovar e o site estiver no ar.</p></div>
+                    <div class="garantia vidro revelar" data-atraso=".3"><svg viewBox="0 0 24 24"><path d="M4 18l1.2-3.6A7.5 7.5 0 1 1 8.4 18.8L4 18z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg><b>Gente de verdade</b><p>Atendimento humano pelo WhatsApp, sem robô e sem enrolação.</p></div>
                 </div>
             </div>
         </section>
@@ -282,25 +316,13 @@
         <!-- ===== PERGUNTAS ===== -->
         <section id="perguntas">
             <div class="container">
-                <span class="etiqueta">Dúvidas</span>
-                <h2>Perguntas frequentes</h2>
+                <span class="etiqueta revelar">Dúvidas</span>
+                <h2 class="revelar">Perguntas <span class="grad">frequentes</span></h2>
                 <div class="faq">
-                    <details>
-                        <summary>Quanto tempo leva pra ficar pronto?</summary>
-                        <p>Depende do pacote: um Start fica pronto em poucos dias; um catálogo Business ou Premium leva um pouco mais. O prazo exato vai escrito na proposta.</p>
-                    </details>
-                    <details>
-                        <summary>Preciso pagar hospedagem?</summary>
-                        <p>Não necessariamente. Publicamos o seu site num servidor gratuito. Se quiser um endereço próprio (seunegocio.com.br), o domínio custa cerca de R$ 40 por ano e a gente configura pra você.</p>
-                    </details>
-                    <details>
-                        <summary>Como o cliente compra pelo site?</summary>
-                        <p>Cada produto tem um botão COMPRAR que abre o seu WhatsApp já com o nome da peça na mensagem. Você fecha a venda na conversa, como já faz hoje.</p>
-                    </details>
-                    <details>
-                        <summary>E se eu quiser mudar algo depois?</summary>
-                        <p>Cada pacote tem rodadas de revisão incluídas. Depois da entrega, você pode contratar a manutenção mensal ou pedir ajustes avulsos.</p>
-                    </details>
+                    <details class="vidro revelar"><summary>Quanto tempo leva pra ficar pronto?</summary><p>Depende do pacote: um Start fica pronto em poucos dias; um catálogo Business ou Premium leva um pouco mais. O prazo exato vai escrito na proposta.</p></details>
+                    <details class="vidro revelar"><summary>Preciso pagar hospedagem?</summary><p>Não necessariamente. Publicamos o seu site num servidor gratuito. Se quiser um endereço próprio (seunegocio.com.br), o domínio custa cerca de R$ 40 por ano e a gente configura pra você.</p></details>
+                    <details class="vidro revelar"><summary>Como o cliente compra pelo site?</summary><p>Cada produto tem um botão COMPRAR que abre o seu WhatsApp já com o nome da peça na mensagem. Você fecha a venda na conversa, como já faz hoje.</p></details>
+                    <details class="vidro revelar"><summary>E se eu quiser mudar algo depois?</summary><p>Cada pacote tem rodadas de revisão incluídas. Depois da entrega, você pode contratar a manutenção mensal ou pedir ajustes avulsos.</p></details>
                 </div>
             </div>
         </section>
@@ -308,11 +330,14 @@
         <!-- ===== CHAMADA FINAL ===== -->
         <section class="final">
             <div class="container">
-                <span class="etiqueta">Vamos começar?</span>
-                <h2>Seu negócio merece estar no próximo nível</h2>
-                <p class="sub" style="margin-inline:auto">Monte o orçamento em 1 minuto. A resposta chega no seu WhatsApp.</p>
-                <div class="acoes">
-                    <a class="botao botao-azul" href="orcamento.html">Monte seu orçamento</a>
+                <div class="caixa vidro revelar">
+                    <span class="etiqueta">Vamos começar?</span>
+                    <h2>Seu negócio merece estar no <span class="grad">próximo nível</span></h2>
+                    <p class="sub">Monte o orçamento em 1 minuto. A resposta chega no seu WhatsApp.</p>
+                    <div class="acoes">
+                        <a class="botao botao-ciano" href="orcamento.html"><b>Monte seu orçamento</b><svg class="seta" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+                        <a class="botao botao-contorno" href="https://wa.me/5527999998911?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Studio%20Evolution%20Tech." target="_blank" rel="noopener"><b>Falar no WhatsApp</b></a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -333,11 +358,15 @@
         </div>
     </footer>
 
-    <!-- ===== WHATSAPP FLUTUANTE ===== -->
     <a class="whats" href="https://wa.me/5527999998911?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Studio%20Evolution%20Tech%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35M12.05 21.8a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.9 9.9 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.83 9.83 0 0 1 9.88 9.9c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89a11.8 11.8 0 0 0-3.48-8.41Z"/></svg>
     </a>
 
+    <script src="efeitos.js?v=2"></script>
+    <script>
+        /* a linha do tempo acende quando aparece */
+        new IntersectionObserver((es, o) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visto'); o.disconnect(); } }), { threshold: .4 }).observe(document.querySelector('.linha-tempo'));
+    </script>
 </body>
 
 </html>

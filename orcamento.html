@@ -9,55 +9,55 @@
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='38' width='13' height='20' rx='3.5' fill='%2393C5FD'/%3E%3Crect x='25.5' y='26' width='13' height='32' rx='3.5' fill='%232563EB'/%3E%3Cpath d='M45 58V16l6.5-10L58 16v42z' fill='%2322D3EE'/%3E%3C/svg%3E">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="estilo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css?v=2">
 
     <style>
-        body { background: var(--gelo); }
+        body { background: var(--fundo); }
         .pagina { padding: 116px 0 80px; }
         .pagina h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; margin: 10px 0 12px; }
         .grade { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; align-items: start; margin-top: 36px; }
         .bloco { margin-bottom: 34px; }
         .bloco h2 { font-size: 20px; margin: 0 0 14px; display: flex; gap: 10px; align-items: baseline; }
-        .bloco h2 span { font-size: 12px; color: var(--azul); }
+        .bloco h2 span { font-size: 12px; color: var(--ciano); font-family: var(--mono); }
         .nota { color: var(--cinza); font-size: 13px; margin: -6px 0 12px; }
 
         .opcoes-pacote { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-        .op-pacote { position: relative; display: grid; gap: 6px; padding: 18px; border-radius: 16px; background: #FFFFFF; border: 1.5px solid var(--linha); cursor: pointer; transition: border-color .2s, box-shadow .2s; }
+        .op-pacote { position: relative; display: grid; gap: 6px; padding: 18px; border-radius: 16px; background: var(--cartao); backdrop-filter: blur(10px); border: 1.5px solid var(--linha); cursor: pointer; transition: border-color .2s, box-shadow .2s; }
         .op-pacote:hover { border-color: var(--azul); }
         .op-pacote input { position: absolute; opacity: 0; pointer-events: none; }
-        .op-pacote:has(input:checked) { border-color: var(--azul); box-shadow: 0 0 0 3px rgba(37, 99, 235, .18); }
+        .op-pacote:has(input:checked) { border-color: var(--ciano); box-shadow: 0 0 0 1px var(--ciano), 0 0 30px rgba(34, 211, 238, .25); }
         .op-pacote:has(input:focus-visible) { outline: 2px solid var(--azul); outline-offset: 3px; }
         .op-pacote .l1 { display: flex; justify-content: space-between; gap: 8px; }
         .op-pacote b { font-size: 17px; }
-        .op-pacote .v { font-weight: 800; color: var(--azul); }
+        .op-pacote .v { font-weight: 800; color: var(--ciano); }
         .op-pacote small { color: var(--cinza); font-size: 12.5px; line-height: 1.45; }
 
-        .lista { background: #FFFFFF; border: 1.5px solid var(--linha); border-radius: 16px; overflow: hidden; }
+        .lista { background: var(--cartao); backdrop-filter: blur(10px); border: 1.5px solid var(--linha); border-radius: 16px; overflow: hidden; }
         .item { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--linha); cursor: pointer; font-size: 14px; }
         .item:first-child { border-top: 0; }
-        .item:hover { background: var(--gelo); }
-        .item input { width: 18px; height: 18px; accent-color: var(--azul); margin: 0; }
+        .item:hover { background: rgba(34, 211, 238, .06); }
+        .item input { width: 18px; height: 18px; accent-color: var(--ciano); margin: 0; }
         .item small { display: block; color: var(--cinza); font-size: 12px; }
         .item .v { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
 
         .campos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
         .campo { display: grid; gap: 6px; font-size: 13px; font-weight: 700; }
-        .campo input, .campo textarea { font: inherit; font-weight: 400; color: var(--texto); background: #FFFFFF; border: 1.5px solid var(--linha); border-radius: 12px; padding: 11px 13px; width: 100%; }
-        .campo input:focus, .campo textarea:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px rgba(37, 99, 235, .15); }
+        .campo input, .campo textarea { font: inherit; font-weight: 400; color: var(--texto); background: var(--cartao); backdrop-filter: blur(10px); border: 1.5px solid var(--linha); border-radius: 12px; padding: 11px 13px; width: 100%; }
+        .campo input:focus, .campo textarea:focus { outline: none; border-color: var(--ciano); box-shadow: 0 0 0 3px rgba(34, 211, 238, .2); }
         .largo { grid-column: 1 / -1; }
 
-        .recibo { position: sticky; top: 92px; display: grid; gap: 14px; padding: 24px; border-radius: 20px; background: var(--fundo); color: #FFFFFF; }
+        .recibo { position: sticky; top: 92px; display: grid; gap: 14px; padding: 24px; border-radius: 20px; background: linear-gradient(180deg, rgba(34, 211, 238, .12), rgba(37, 99, 235, .08)); border: 1px solid rgba(34, 211, 238, .4); box-shadow: 0 0 50px rgba(34, 211, 238, .15); color: #FFFFFF; backdrop-filter: blur(12px); }
         .recibo h2 { margin: 0; font-size: 18px; }
         .linhas { display: grid; gap: 8px; font-size: 13.5px; color: #C9D8F5; border-bottom: 1.5px dashed rgba(255, 255, 255, .2); padding-bottom: 14px; }
         .linha { display: flex; justify-content: space-between; gap: 10px; }
         .linha span:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; color: #FFFFFF; }
         .rot { font-size: 11px; letter-spacing: .2em; color: var(--claro); }
-        .total { font-size: 40px; font-weight: 800; line-height: 1; color: var(--ciano); font-variant-numeric: tabular-nums; }
+        .total { font-size: 40px; font-weight: 800; line-height: 1; color: var(--ciano); font-variant-numeric: tabular-nums; text-shadow: 0 0 20px rgba(34, 211, 238, .6); }
         .partes { font-size: 13px; color: #C9D8F5; display: grid; gap: 2px; }
         .partes b { color: #FFFFFF; }
         .mensal { font-size: 14px; font-weight: 700; color: var(--ciano); }
-        .enviar { background: var(--verde); color: #FFFFFF; width: 100%; padding: 15px; font-size: 15px; }
+        .enviar { background: var(--verde); color: #FFFFFF; width: 100%; padding: 15px; font-size: 15px; box-shadow: 0 0 26px rgba(37, 211, 102, .45); }
         .copiar { background: transparent; color: #FFFFFF; border: 1.5px solid rgba(255, 255, 255, .3); width: 100%; padding: 11px; font-size: 13px; }
         .aviso { font-size: 12.5px; color: var(--claro); text-align: center; margin: 0; min-height: 1em; }
         #texto-copia { width: 100%; font: 12px monospace; border-radius: 10px; }
@@ -68,6 +68,10 @@
 </head>
 
 <body>
+    <canvas id="rede" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="ruido" aria-hidden="true"></div>
+    <div class="cursor-luz" aria-hidden="true"></div>
 
     <!-- ===== TOPO ===== -->
     <header class="topo">
@@ -81,7 +85,7 @@
                 <a href="index.html#portfolio">Portfólio</a>
                 <a href="index.html#como-funciona">Como funciona</a>
             </nav>
-            <a class="botao botao-contorno" href="index.html">← Voltar<span>&nbsp;ao site</span></a>
+            <a class="botao botao-contorno" href="index.html"><b>← Voltar</b><span>&nbsp;ao site</span></a>
         </div>
     </header>
 
@@ -257,6 +261,7 @@
 
         atualizar();
     </script>
+    <script src="efeitos.js?v=2"></script>
 </body>
 
 </html>
