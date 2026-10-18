@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento · Studio Evolution Tech</title>
+    <meta name="description" content="Monte o orçamento do seu site em 1 minuto e envie pelo WhatsApp.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='38' width='13' height='20' rx='3.5' fill='%2393C5FD'/%3E%3Crect x='25.5' y='26' width='13' height='32' rx='3.5' fill='%232563EB'/%3E%3Cpath d='M45 58V16l6.5-10L58 16v42z' fill='%2322D3EE'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+
+    <style>
+        body { background: var(--gelo); }
+        .pagina { padding: 116px 0 80px; }
+        .pagina h1 { font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.08; margin: 10px 0 12px; }
+        .grade { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 28px; align-items: start; margin-top: 36px; }
+        .bloco { margin-bottom: 34px; }
+        .bloco h2 { font-size: 20px; margin: 0 0 14px; display: flex; gap: 10px; align-items: baseline; }
+        .bloco h2 span { font-size: 12px; color: var(--azul); }
+        .nota { color: var(--cinza); font-size: 13px; margin: -6px 0 12px; }
+
+        .opcoes-pacote { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .op-pacote { position: relative; display: grid; gap: 6px; padding: 18px; border-radius: 16px; background: #FFFFFF; border: 1.5px solid var(--linha); cursor: pointer; transition: border-color .2s, box-shadow .2s; }
+        .op-pacote:hover { border-color: var(--azul); }
+        .op-pacote input { position: absolute; opacity: 0; pointer-events: none; }
+        .op-pacote:has(input:checked) { border-color: var(--azul); box-shadow: 0 0 0 3px rgba(37, 99, 235, .18); }
+        .op-pacote:has(input:focus-visible) { outline: 2px solid var(--azul); outline-offset: 3px; }
+        .op-pacote .l1 { display: flex; justify-content: space-between; gap: 8px; }
+        .op-pacote b { font-size: 17px; }
+        .op-pacote .v { font-weight: 800; color: var(--azul); }
+        .op-pacote small { color: var(--cinza); font-size: 12.5px; line-height: 1.45; }
+
+        .lista { background: #FFFFFF; border: 1.5px solid var(--linha); border-radius: 16px; overflow: hidden; }
+        .item { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--linha); cursor: pointer; font-size: 14px; }
+        .item:first-child { border-top: 0; }
+        .item:hover { background: var(--gelo); }
+        .item input { width: 18px; height: 18px; accent-color: var(--azul); margin: 0; }
+        .item small { display: block; color: var(--cinza); font-size: 12px; }
+        .item .v { font-weight: 700; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+        .campos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .campo { display: grid; gap: 6px; font-size: 13px; font-weight: 700; }
+        .campo input, .campo textarea { font: inherit; font-weight: 400; color: var(--texto); background: #FFFFFF; border: 1.5px solid var(--linha); border-radius: 12px; padding: 11px 13px; width: 100%; }
+        .campo input:focus, .campo textarea:focus { outline: none; border-color: var(--azul); box-shadow: 0 0 0 3px rgba(37, 99, 235, .15); }
+        .largo { grid-column: 1 / -1; }
+
+        .recibo { position: sticky; top: 92px; display: grid; gap: 14px; padding: 24px; border-radius: 20px; background: var(--fundo); color: #FFFFFF; }
+        .recibo h2 { margin: 0; font-size: 18px; }
+        .linhas { display: grid; gap: 8px; font-size: 13.5px; color: #C9D8F5; border-bottom: 1.5px dashed rgba(255, 255, 255, .2); padding-bottom: 14px; }
+        .linha { display: flex; justify-content: space-between; gap: 10px; }
+        .linha span:last-child { white-space: nowrap; font-variant-numeric: tabular-nums; color: #FFFFFF; }
+        .rot { font-size: 11px; letter-spacing: .2em; color: var(--claro); }
+        .total { font-size: 40px; font-weight: 800; line-height: 1; color: var(--ciano); font-variant-numeric: tabular-nums; }
+        .partes { font-size: 13px; color: #C9D8F5; display: grid; gap: 2px; }
+        .partes b { color: #FFFFFF; }
+        .mensal { font-size: 14px; font-weight: 700; color: var(--ciano); }
+        .enviar { background: var(--verde); color: #FFFFFF; width: 100%; padding: 15px; font-size: 15px; }
+        .copiar { background: transparent; color: #FFFFFF; border: 1.5px solid rgba(255, 255, 255, .3); width: 100%; padding: 11px; font-size: 13px; }
+        .aviso { font-size: 12.5px; color: var(--claro); text-align: center; margin: 0; min-height: 1em; }
+        #texto-copia { width: 100%; font: 12px monospace; border-radius: 10px; }
+
+        @media (max-width: 900px) { .grade { grid-template-columns: minmax(0, 1fr); } .recibo { position: static; } }
+        @media (max-width: 560px) { .opcoes-pacote, .campos { grid-template-columns: minmax(0, 1fr); } }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== TOPO ===== -->
+    <header class="topo">
+        <div class="container">
+            <a class="marca" href="index.html" aria-label="Studio Evolution Tech, voltar ao início">
+                <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="38" width="13" height="20" rx="3.5" fill="#1E3A8A"/><rect x="25.5" y="26" width="13" height="32" rx="3.5" fill="#3B82F6"/><path d="M45 58V16l6.5-10L58 16v42z" fill="#22D3EE"/></svg>
+                <span><small>STUDIO</small><b>Evolution Tech</b></span>
+            </a>
+            <nav class="menu">
+                <a href="index.html#servicos">Serviços</a>
+                <a href="index.html#portfolio">Portfólio</a>
+                <a href="index.html#como-funciona">Como funciona</a>
+            </nav>
+            <a class="botao botao-contorno" href="index.html">← Voltar<span>&nbsp;ao site</span></a>
+        </div>
+    </header>
+
+    <main class="pagina">
+        <div class="container">
+            <span class="etiqueta">Orçamento grátis</span>
+            <h1>Monte o site do seu negócio</h1>
+            <p style="color:var(--cinza);max-width:620px;margin:0">Escolha o pacote, marque o que quiser a mais e veja o valor na hora. No final, toque no botão verde: o orçamento chega pra gente no WhatsApp.</p>
+
+            <div class="grade">
+                <form id="form" novalidate>
+                    <div class="bloco">
+                        <h2><span>1/4</span>Escolha o pacote</h2>
+                        <div class="opcoes-pacote" id="pacotes"></div>
+                    </div>
+                    <div class="bloco">
+                        <h2><span>2/4</span>Quer algo a mais?</h2>
+                        <p class="nota">Opcional. Se algum item já fizer parte do pacote, ele não é cobrado de novo: a gente confere no atendimento.</p>
+                        <div class="lista" id="adicionais"></div>
+                    </div>
+                    <div class="bloco">
+                        <h2><span>3/4</span>Manutenção mensal</h2>
+                        <div class="lista" id="planos"></div>
+                    </div>
+                    <div class="bloco">
+                        <h2><span>4/4</span>Seus dados</h2>
+                        <div class="campos">
+                            <label class="campo" for="nome">Seu nome<input id="nome" type="text" autocomplete="name" placeholder="Ex.: Mariana"></label>
+                            <label class="campo" for="negocio">Nome do negócio<input id="negocio" type="text" placeholder="Ex.: Ateliê Flor de Linho"></label>
+                            <label class="campo largo" for="obs">Conte um pouco do que você precisa (opcional)<textarea id="obs" rows="3" placeholder="Ex.: loja de roupas femininas, uns 20 produtos, quero vender pelo WhatsApp"></textarea></label>
+                        </div>
+                    </div>
+                </form>
+
+                <aside class="recibo" aria-live="polite">
+                    <h2>Seu orçamento</h2>
+                    <div class="linhas" id="linhas"></div>
+                    <span class="rot">TOTAL DO SITE</span>
+                    <span class="total" id="total">R$ 0</span>
+                    <div class="partes" id="partes"></div>
+                    <div class="mensal" id="mensal" hidden></div>
+                    <a class="botao enviar" id="enviar" href="#" target="_blank" rel="noopener">Enviar orçamento pelo WhatsApp</a>
+                    <button class="botao copiar" id="copiar" type="button">Copiar o orçamento</button>
+                    <p class="aviso" id="aviso"></p>
+                    <textarea id="texto-copia" rows="6" readonly hidden></textarea>
+                    <p class="aviso">Se o WhatsApp não abrir: <b style="user-select:all">(27) 99999-8911</b></p>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="container">
+            <span>Valores promocionais de entrada. Domínio, hospedagem paga e ferramentas de terceiros são combinados à parte.</span>
+            <span>© 2026 Studio Evolution Tech</span>
+        </div>
+    </footer>
+
+    <script>
+        /* ===== A TABELA DE PREÇOS: mude aqui quando a tabela do Notion mudar ===== */
+        const WHATSAPP = '5527999998911';
+
+        const PACOTES = [
+            { id: 'start', nome: 'START', sub: 'Presença Digital', preco: 399, inclui: 'Página simples, WhatsApp, localização e versão pra celular. Até 3 seções.' },
+            { id: 'essencial', nome: 'ESSENCIAL', sub: 'Site Profissional', preco: 699, inclui: 'Tudo do Start + visual personalizado, galeria, contato e SEO básico.' },
+            { id: 'business', nome: 'BUSINESS', sub: 'Catálogo Comercial', preco: 999, inclui: 'Tudo do Essencial + catálogo de até 12 produtos com compra pelo WhatsApp.' },
+            { id: 'premium', nome: 'PREMIUM', sub: 'Experiência de Marca', preco: 1599, inclui: 'Tudo do Business + até 25 produtos, identidade caprichada e animações.' }
+        ];
+
+        const ADICIONAIS = [
+            ['Botão flutuante de WhatsApp', 49],
+            ['Mapa do Google no site', 49],
+            ['Galeria extra de fotos', 79],
+            ['Botão de compra com mensagem personalizada', 79],
+            ['Banner personalizado', 99],
+            ['Configuração do domínio (seunegocio.com.br)', 99],
+            ['Animações e efeitos extras', 119],
+            ['Formulário que envia os contatos', 149],
+            ['Página adicional', 149],
+            ['Mais 10 produtos no catálogo', 149],
+            ['Tratamento de 10 imagens', 149],
+            ['SEO inicial aprimorado (aparecer no Google)', 199],
+            ['Página de campanha ou promoção', 249]
+        ];
+
+        const PLANOS = [
+            { id: 'nenhum', nome: 'Sem manutenção', preco: 0, desc: 'Eu mesmo cuido depois da entrega' },
+            { id: 'cuidado', nome: 'CUIDADO', preco: 59, desc: 'Verificação mensal, correções pequenas e 1 alteração simples' },
+            { id: 'atualizacao', nome: 'ATUALIZAÇÃO', preco: 119, desc: 'Até 3 alterações por mês, troca de banners e verificação técnica' },
+            { id: 'comercial', nome: 'COMERCIAL', preco: 199, desc: 'Até 6 alterações por mês, 10 produtos, banners e acompanhamento' }
+        ];
+
+        const real = v => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 });
+
+        /* Se veio de um botão "Escolher" do site, já marca aquele pacote */
+        const pedido = new URLSearchParams(location.search).get('pacote');
+        const inicial = PACOTES.some(p => p.id === pedido) ? pedido : 'business';
+
+        document.getElementById('pacotes').innerHTML = PACOTES.map(p => `
+            <label class="op-pacote" for="pac-${p.id}">
+                <input type="radio" name="pacote" id="pac-${p.id}" value="${p.id}" ${p.id === inicial ? 'checked' : ''}>
+                <span class="l1"><b>${p.nome}</b><span class="v">${real(p.preco)}</span></span>
+                <small>${p.inclui}</small>
+            </label>`).join('');
+
+        document.getElementById('adicionais').innerHTML = ADICIONAIS.map(([nome, preco], i) => `
+            <label class="item" for="ad-${i}">
+                <input type="checkbox" id="ad-${i}" value="${i}">
+                <span>${nome}</span>
+                <span class="v">+ ${real(preco)}</span>
+            </label>`).join('');
+
+        document.getElementById('planos').innerHTML = PLANOS.map(p => `
+            <label class="item" for="pl-${p.id}">
+                <input type="radio" name="plano" id="pl-${p.id}" value="${p.id}" ${p.id === 'nenhum' ? 'checked' : ''}>
+                <span>${p.nome}<small>${p.desc}</small></span>
+                <span class="v">${p.preco ? real(p.preco) + '/mês' : '—'}</span>
+            </label>`).join('');
+
+        function atualizar() {
+            const pac = PACOTES.find(p => p.id === document.querySelector('input[name=pacote]:checked').value);
+            const ads = [...document.querySelectorAll('#adicionais input:checked')].map(c => ADICIONAIS[+c.value]);
+            const plano = PLANOS.find(p => p.id === document.querySelector('input[name=plano]:checked').value);
+            const total = pac.preco + ads.reduce((s, a) => s + a[1], 0);
+
+            document.getElementById('linhas').innerHTML =
+                `<div class="linha"><span>Pacote ${pac.nome}</span><span>${real(pac.preco)}</span></div>` +
+                (ads.length ? ads.map(a => `<div class="linha"><span>${a[0]}</span><span>+ ${real(a[1])}</span></div>`).join('')
+                    : '<div class="linha"><span>Sem adicionais</span><span></span></div>');
+            document.getElementById('total').textContent = real(total);
+            document.getElementById('partes').innerHTML =
+                `<span>Entrada (50%) <b>${real(total / 2)}</b></span><span>Na entrega (50%) <b>${real(total / 2)}</b></span>`;
+            const mensal = document.getElementById('mensal');
+            mensal.hidden = !plano.preco;
+            mensal.textContent = plano.preco ? `+ ${real(plano.preco)}/mês de manutenção (${plano.nome})` : '';
+
+            const nome = document.getElementById('nome').value.trim();
+            const negocio = document.getElementById('negocio').value.trim();
+            const obs = document.getElementById('obs').value.trim();
+            const linhas = [
+                'Olá! Montei um orçamento no site do Studio Evolution Tech.',
+                nome ? 'Nome: ' + nome : '',
+                negocio ? 'Negócio: ' + negocio : '',
+                '',
+                `Pacote: ${pac.nome} (${pac.sub}) – ${real(pac.preco)}`,
+                ads.length ? 'Adicionais:\n' + ads.map(a => `• ${a[0]} – ${real(a[1])}`).join('\n') : 'Adicionais: nenhum',
+                '',
+                `TOTAL DO SITE: ${real(total)}`,
+                `(50% na contratação: ${real(total / 2)} · 50% na entrega: ${real(total / 2)})`,
+                'Manutenção: ' + (plano.preco ? `${plano.nome} – ${real(plano.preco)}/mês` : 'sem manutenção'),
+                obs ? '\nSobre o projeto: ' + obs : ''
+            ];
+            const texto = linhas.filter((l, i) => l !== '' || (i > 0 && linhas[i - 1] !== '')).join('\n').trim();
+            document.getElementById('enviar').href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(texto);
+            document.getElementById('texto-copia').value = texto;
+            return texto;
+        }
+
+        document.getElementById('form').addEventListener('input', atualizar);
+        document.getElementById('form').addEventListener('change', atualizar);
+        document.getElementById('form').addEventListener('submit', e => e.preventDefault());
+        document.getElementById('copiar').addEventListener('click', () => {
+            const texto = atualizar();
+            const aviso = document.getElementById('aviso');
+            navigator.clipboard.writeText(texto)
+                .then(() => { aviso.textContent = 'Orçamento copiado. É só colar no WhatsApp.'; })
+                .catch(() => {
+                    const area = document.getElementById('texto-copia');
+                    area.hidden = false; area.select();
+                    aviso.textContent = 'Selecionei o texto abaixo: copie e cole no WhatsApp.';
+                });
+        });
+
+        atualizar();
+    </script>
+</body>
+
+</html>
