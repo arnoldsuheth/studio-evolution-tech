@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Evolution Tech · Sites que vendem pelo WhatsApp</title>
+    <meta name="description" content="Sites e catálogos bonitos no celular, que vendem direto pelo WhatsApp. Feitos sob medida pra pequenos negócios. A partir de R$ 399.">
+    <!-- Prévia quando o link é compartilhado no WhatsApp/Instagram -->
+    <meta property="og:title" content="Studio Evolution Tech · Seu negócio no próximo nível">
+    <meta property="og:description" content="Sites e catálogos que vendem pelo WhatsApp. A partir de R$ 399.">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='38' width='13' height='20' rx='3.5' fill='%2393C5FD'/%3E%3Crect x='25.5' y='26' width='13' height='32' rx='3.5' fill='%232563EB'/%3E%3Cpath d='M45 58V16l6.5-10L58 16v42z' fill='%2322D3EE'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+
+    <style>
+        /* ===== CAPA ===== */
+        .capa {
+            background: radial-gradient(circle at 80% 20%, #16316F 0%, var(--fundo) 55%);
+            color: #FFFFFF; padding: 150px 0 90px; position: relative; overflow: hidden;
+        }
+        .capa .container { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 40px; align-items: center; }
+        .capa .etiqueta { color: var(--ciano); }
+        .capa h1 { font-size: clamp(40px, 6.4vw, 76px); font-weight: 800; line-height: 1.02; letter-spacing: -0.03em; margin: 14px 0 22px; }
+        .capa h1 em { font-style: normal; color: var(--ciano); }
+        .capa p { color: #C9D8F5; font-size: 18px; max-width: 520px; margin: 0 0 34px; }
+        .acoes { display: flex; flex-wrap: wrap; gap: 14px; }
+        .provas { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 34px; font-size: 13px; color: #9FB4DB; }
+        .provas b { color: #FFFFFF; }
+
+        /* Os degraus do símbolo, crescendo quando a página abre */
+        .degraus { display: flex; align-items: flex-end; justify-content: center; gap: 22px; height: 380px; }
+        .degraus i { display: block; width: 92px; border-radius: 22px; transform-origin: bottom; animation: crescer 1.1s cubic-bezier(.2, .8, .2, 1) both; }
+        .degraus i:nth-child(1) { height: 36%; background: #1E3A8A; }
+        .degraus i:nth-child(2) { height: 62%; background: var(--azul2); animation-delay: .15s; }
+        .degraus svg { width: 92px; height: 100%; animation: crescer 1.1s cubic-bezier(.2, .8, .2, 1) .3s both, flutuar 4s ease-in-out 1.5s infinite; transform-origin: bottom; }
+        @keyframes crescer { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: 1; } }
+        @keyframes flutuar { 50% { transform: translateY(-10px); } }
+
+        /* ===== SERVIÇOS ===== */
+        .pacotes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .pacote {
+            position: relative; display: flex; flex-direction: column; gap: 10px;
+            padding: 26px 22px; border-radius: 20px; background: var(--gelo); border: 1.5px solid var(--linha);
+            transition: transform .25s, border-color .25s, box-shadow .25s;
+        }
+        .pacote:hover { transform: translateY(-6px); border-color: var(--azul); box-shadow: 0 18px 40px rgba(37, 99, 235, 0.15); }
+        .pacote.destaque { background: var(--fundo); color: #FFFFFF; border-color: var(--fundo); }
+        .pacote.destaque p, .pacote.destaque li { color: #C9D8F5; }
+        .pacote .selo { position: absolute; top: -12px; left: 22px; background: var(--ciano); color: var(--fundo); font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 999px; }
+        .pacote h3 { margin: 0; font-size: 20px; font-weight: 800; letter-spacing: .04em; }
+        .pacote .para { margin: 0; font-size: 13px; color: var(--cinza); min-height: 42px; }
+        .pacote .preco { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; }
+        .pacote.destaque .preco { color: var(--ciano); }
+        .pacote ul { margin: 0; padding-left: 18px; font-size: 13.5px; color: var(--cinza); display: grid; gap: 6px; flex: 1; }
+        .pacote .botao { margin-top: 8px; padding: 12px 18px; font-size: 14px; }
+        .extras { margin-top: 26px; font-size: 14px; color: var(--cinza); }
+
+        /* ===== PORTFÓLIO ===== */
+        .portfolio { background: var(--gelo); }
+        .case { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 50px; align-items: center; }
+        .case-fotos { position: relative; height: 520px; }
+        .case-fotos img { position: absolute; border-radius: 22px; object-fit: cover; box-shadow: 0 24px 50px rgba(11, 30, 74, 0.25); }
+        .case-fotos .f1 { width: 78%; height: 78%; left: 0; top: 0; }
+        .case-fotos .f2 { width: 44%; height: 58%; right: 0; bottom: 0; border: 6px solid #FFFFFF; }
+        .case h3 { font-size: 30px; margin: 6px 0 12px; font-weight: 800; }
+        .case ul { padding: 0; list-style: none; display: grid; gap: 12px; margin: 22px 0 30px; }
+        .case li { display: flex; gap: 12px; align-items: flex-start; }
+        .case li::before { content: ""; flex: 0 0 10px; height: 10px; margin-top: 8px; border-radius: 3px; background: var(--ciano); }
+
+        /* ===== COMO FUNCIONA ===== */
+        .passos { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; counter-reset: passo; list-style: none; padding: 0; margin: 0; }
+        .passos li { padding: 22px 18px; border-radius: 18px; border: 1.5px solid var(--linha); counter-increment: passo; }
+        .passos li::before { content: "0" counter(passo); display: block; font-size: 26px; font-weight: 800; color: var(--azul); margin-bottom: 8px; }
+        .passos b { display: block; margin-bottom: 4px; }
+        .passos p { margin: 0; font-size: 13.5px; color: var(--cinza); }
+
+        /* ===== CONFIANÇA ===== */
+        .confianca { background: var(--fundo); color: #FFFFFF; }
+        .confianca .etiqueta { color: var(--ciano); }
+        .confianca .sub { color: #C9D8F5; }
+        .garantias { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .garantia { padding: 24px; border-radius: 18px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .garantia b { display: block; font-size: 17px; margin-bottom: 6px; color: var(--ciano); }
+        .garantia p { margin: 0; font-size: 14px; color: #C9D8F5; }
+
+        /* ===== PERGUNTAS ===== */
+        .faq { display: grid; gap: 12px; max-width: 780px; }
+        .faq details { border: 1.5px solid var(--linha); border-radius: 16px; padding: 18px 22px; }
+        .faq summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+        .faq summary::after { content: "+"; color: var(--azul); font-size: 22px; line-height: 1; }
+        .faq details[open] summary::after { content: "–"; }
+        .faq p { margin: 12px 0 0; color: var(--cinza); }
+
+        /* ===== CHAMADA FINAL ===== */
+        .final { text-align: center; background: linear-gradient(180deg, #FFFFFF, var(--gelo)); }
+        .final h2 { max-width: 700px; margin-inline: auto; }
+        .final .acoes { justify-content: center; }
+
+        /* ===== CELULAR ===== */
+        @media (max-width: 980px) {
+            .pacotes, .garantias { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .passos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+        @media (max-width: 760px) {
+            .capa { padding: 120px 0 70px; }
+            .capa .container, .case { grid-template-columns: minmax(0, 1fr); }
+            .degraus { height: 220px; gap: 14px; }
+            .degraus i, .degraus svg { width: 60px; }
+            .case-fotos { height: 380px; }
+        }
+        @media (max-width: 520px) {
+            .pacotes, .garantias, .passos { grid-template-columns: minmax(0, 1fr); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ===== TOPO ===== -->
+    <header class="topo">
+        <div class="container">
+            <a class="marca" href="#inicio" aria-label="Studio Evolution Tech, início">
+                <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="38" width="13" height="20" rx="3.5" fill="#1E3A8A"/><rect x="25.5" y="26" width="13" height="32" rx="3.5" fill="#3B82F6"/><path d="M45 58V16l6.5-10L58 16v42z" fill="#22D3EE"/></svg>
+                <span><small>STUDIO</small><b>Evolution Tech</b></span>
+            </a>
+            <nav class="menu">
+                <a href="#servicos">Serviços</a>
+                <a href="#portfolio">Portfólio</a>
+                <a href="#como-funciona">Como funciona</a>
+                <a href="#perguntas">Dúvidas</a>
+            </nav>
+            <a class="botao botao-ciano" href="orcamento.html">Orçamento<span>&nbsp;grátis</span></a>
+        </div>
+    </header>
+
+    <main>
+        <!-- ===== CAPA ===== -->
+        <section class="capa" id="inicio">
+            <div class="container">
+                <div>
+                    <span class="etiqueta">Sites para pequenos negócios</span>
+                    <h1>Seu negócio no próximo <em>nível.</em></h1>
+                    <p>Sites e catálogos bonitos no celular, que levam o cliente direto pro seu WhatsApp. Feitos sob medida, com atendimento de gente de verdade.</p>
+                    <div class="acoes">
+                        <a class="botao botao-ciano" href="orcamento.html">Monte seu orçamento</a>
+                        <a class="botao botao-contorno" href="https://wa.me/5527999998911?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Studio%20Evolution%20Tech%20e%20quero%20conversar%20sobre%20um%20site." target="_blank" rel="noopener">Falar no WhatsApp</a>
+                    </div>
+                    <div class="provas">
+                        <span><b>A partir de R$ 399</b></span>
+                        <span><b>50%</b> na contratação · <b>50%</b> na entrega</span>
+                        <span>Feito pra <b>celular</b></span>
+                    </div>
+                </div>
+                <div class="degraus" aria-hidden="true">
+                    <i></i><i></i>
+                    <svg viewBox="0 0 92 380" preserveAspectRatio="none"><path d="M0 380V90L46 0l46 90v290z" fill="#22D3EE"/></svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== SERVIÇOS ===== -->
+        <section id="servicos">
+            <div class="container">
+                <span class="etiqueta">Serviços</span>
+                <h2>Um pacote pra cada momento do seu negócio</h2>
+                <p class="sub">Preço fechado, prazo combinado e tudo escrito antes de começar. Você escolhe o pacote e acrescenta o que quiser.</p>
+                <div class="pacotes">
+                    <article class="pacote">
+                        <h3>START</h3>
+                        <p class="para">Pra quem só precisa estar na internet</p>
+                        <span class="preco">R$ 399</span>
+                        <ul>
+                            <li>Página simples, até 3 seções</li>
+                            <li>Botão de WhatsApp</li>
+                            <li>Localização e redes</li>
+                            <li>Versão pra celular</li>
+                            <li>1 rodada de revisão</li>
+                        </ul>
+                        <a class="botao botao-azul" href="orcamento.html?pacote=start">Escolher</a>
+                    </article>
+                    <article class="pacote">
+                        <h3>ESSENCIAL</h3>
+                        <p class="para">Apresentação profissional do seu negócio</p>
+                        <span class="preco">R$ 699</span>
+                        <ul>
+                            <li>Tudo do Start</li>
+                            <li>Visual personalizado, até 5 seções</li>
+                            <li>Galeria de fotos</li>
+                            <li>Formulário de contato</li>
+                            <li>Aparecer no Google (SEO básico)</li>
+                        </ul>
+                        <a class="botao botao-azul" href="orcamento.html?pacote=essencial">Escolher</a>
+                    </article>
+                    <article class="pacote destaque">
+                        <span class="selo">Mais escolhido por lojas</span>
+                        <h3>BUSINESS</h3>
+                        <p class="para">Catálogo que vende pelo WhatsApp</p>
+                        <span class="preco">R$ 999</span>
+                        <ul>
+                            <li>Tudo do Essencial</li>
+                            <li>Catálogo de até 12 produtos</li>
+                            <li>Botão COMPRAR em cada produto</li>
+                            <li>Efeitos e categorias</li>
+                            <li>2 rodadas de revisão</li>
+                        </ul>
+                        <a class="botao botao-ciano" href="orcamento.html?pacote=business">Escolher</a>
+                    </article>
+                    <article class="pacote">
+                        <h3>PREMIUM</h3>
+                        <p class="para">Experiência de marca completa</p>
+                        <span class="preco">R$ 1.599</span>
+                        <ul>
+                            <li>Tudo do Business</li>
+                            <li>Até 25 produtos</li>
+                            <li>Identidade visual caprichada</li>
+                            <li>Animações e banner de destaque</li>
+                            <li>3 rodadas de revisão</li>
+                        </ul>
+                        <a class="botao botao-azul" href="orcamento.html?pacote=premium">Escolher</a>
+                    </article>
+                </div>
+                <p class="extras">Também fazemos: domínio próprio (seunegocio.com.br), mapa do Google, página de promoção, tratamento de fotos e manutenção mensal a partir de R$ 59/mês. <a href="orcamento.html">Ver todos os extras</a></p>
+            </div>
+        </section>
+
+        <!-- ===== PORTFÓLIO ===== -->
+        <section class="portfolio" id="portfolio">
+            <div class="container case">
+                <div class="case-fotos">
+                    <img class="f1" src="https://arnoldsuheth.github.io/Blessaint/img/blessaint-capa-hd.jpg" alt="Capa do site da BLESSAINT com casal vestindo a marca">
+                    <img class="f2" src="https://arnoldsuheth.github.io/Blessaint/img/freedom-lilas-frente.jpg" alt="Camiseta Freedom lilás no catálogo da BLESSAINT">
+                </div>
+                <div>
+                    <span class="etiqueta">Case #01 · Loja de roupas</span>
+                    <h3>BLESSAINT</h3>
+                    <p class="sub" style="margin-bottom:0">Marca de streetwear com propósito que vendia só pelo Instagram. Ganhou uma vitrine própria, bonita no celular, que leva o cliente direto pra compra.</p>
+                    <ul>
+                        <li>Vitrine 360° que gira com o dedo</li>
+                        <li>Botão COMPRAR em cada peça, abrindo o WhatsApp com o nome do produto</li>
+                        <li>Selos de lançamento, disponível e esgotado</li>
+                        <li>Trilha sonora da marca tocando no site</li>
+                    </ul>
+                    <a class="botao botao-azul" href="https://arnoldsuheth.github.io/Blessaint/" target="_blank" rel="noopener">Ver o site ao vivo</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== COMO FUNCIONA ===== -->
+        <section id="como-funciona">
+            <div class="container">
+                <span class="etiqueta">Como funciona</span>
+                <h2>Do orçamento ao site no ar, sem complicação</h2>
+                <p class="sub">Você acompanha cada etapa pelo WhatsApp e só paga a segunda parte quando o site estiver pronto.</p>
+                <ol class="passos">
+                    <li><b>Orçamento</b><p>Monte o seu em 1 minuto e envie pelo WhatsApp.</p></li>
+                    <li><b>Conversa</b><p>Entendemos seu negócio, fotos, textos e estilo.</p></li>
+                    <li><b>Proposta</b><p>Escopo e prazo por escrito. Entrada de 50%.</p></li>
+                    <li><b>Criação</b><p>Você recebe a prévia e pede ajustes.</p></li>
+                    <li><b>No ar</b><p>Site publicado, 50% final e suporte.</p></li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ===== CONFIANÇA ===== -->
+        <section class="confianca">
+            <div class="container">
+                <span class="etiqueta">Por que confiar</span>
+                <h2>Trabalho transparente, do começo ao fim</h2>
+                <p class="sub">Somos um estúdio novo e por isso mesmo cuidamos de cada cliente como se fosse o primeiro.</p>
+                <div class="garantias">
+                    <div class="garantia"><b>Preço fechado</b><p>O valor do orçamento é o valor final. Sem surpresa no meio do caminho.</p></div>
+                    <div class="garantia"><b>Tudo por escrito</b><p>O que entra, o que não entra e o prazo ficam combinados antes de começar.</p></div>
+                    <div class="garantia"><b>Paga em 2 vezes</b><p>Metade pra começar, metade só quando você aprovar e o site estiver no ar.</p></div>
+                    <div class="garantia"><b>Gente de verdade</b><p>Atendimento humano pelo WhatsApp, sem robô e sem enrolação.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== PERGUNTAS ===== -->
+        <section id="perguntas">
+            <div class="container">
+                <span class="etiqueta">Dúvidas</span>
+                <h2>Perguntas frequentes</h2>
+                <div class="faq">
+                    <details>
+                        <summary>Quanto tempo leva pra ficar pronto?</summary>
+                        <p>Depende do pacote: um Start fica pronto em poucos dias; um catálogo Business ou Premium leva um pouco mais. O prazo exato vai escrito na proposta.</p>
+                    </details>
+                    <details>
+                        <summary>Preciso pagar hospedagem?</summary>
+                        <p>Não necessariamente. Publicamos o seu site num servidor gratuito. Se quiser um endereço próprio (seunegocio.com.br), o domínio custa cerca de R$ 40 por ano e a gente configura pra você.</p>
+                    </details>
+                    <details>
+                        <summary>Como o cliente compra pelo site?</summary>
+                        <p>Cada produto tem um botão COMPRAR que abre o seu WhatsApp já com o nome da peça na mensagem. Você fecha a venda na conversa, como já faz hoje.</p>
+                    </details>
+                    <details>
+                        <summary>E se eu quiser mudar algo depois?</summary>
+                        <p>Cada pacote tem rodadas de revisão incluídas. Depois da entrega, você pode contratar a manutenção mensal ou pedir ajustes avulsos.</p>
+                    </details>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== CHAMADA FINAL ===== -->
+        <section class="final">
+            <div class="container">
+                <span class="etiqueta">Vamos começar?</span>
+                <h2>Seu negócio merece estar no próximo nível</h2>
+                <p class="sub" style="margin-inline:auto">Monte o orçamento em 1 minuto. A resposta chega no seu WhatsApp.</p>
+                <div class="acoes">
+                    <a class="botao botao-azul" href="orcamento.html">Monte seu orçamento</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ===== RODAPÉ ===== -->
+    <footer class="rodape">
+        <div class="container">
+            <a class="marca" href="#inicio" aria-label="Voltar ao início">
+                <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="38" width="13" height="20" rx="3.5" fill="#1E3A8A"/><rect x="25.5" y="26" width="13" height="32" rx="3.5" fill="#3B82F6"/><path d="M45 58V16l6.5-10L58 16v42z" fill="#22D3EE"/></svg>
+                <span><small>STUDIO</small><b>Evolution Tech</b></span>
+            </a>
+            <div class="redes">
+                <a href="https://www.instagram.com/studioevolutiontech/" target="_blank" rel="noopener">Instagram</a>
+                <a href="https://wa.me/5527999998911?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Studio%20Evolution%20Tech." target="_blank" rel="noopener">WhatsApp (27) 99999-8911</a>
+            </div>
+            <span>© 2026 Studio Evolution Tech · Espírito Santo, Brasil</span>
+        </div>
+    </footer>
+
+    <!-- ===== WHATSAPP FLUTUANTE ===== -->
+    <a class="whats" href="https://wa.me/5527999998911?text=Ol%C3%A1!%20Vim%20pelo%20site%20do%20Studio%20Evolution%20Tech%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.03-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.7.63.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2-1.41.25-.7.25-1.29.18-1.41-.08-.13-.28-.2-.57-.35M12.05 21.8a9.9 9.9 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.9 9.9 0 0 1-1.51-5.26c0-5.45 4.44-9.89 9.89-9.89a9.83 9.83 0 0 1 9.88 9.9c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.9 11.9 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89a11.8 11.8 0 0 0-3.48-8.41Z"/></svg>
+    </a>
+
+</body>
+
+</html>
