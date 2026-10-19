@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Gerador de contrato · Studio Evolution Tech</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='6' y='38' width='13' height='20' rx='3.5' fill='%2393C5FD'/%3E%3Crect x='25.5' y='26' width='13' height='32' rx='3.5' fill='%232563EB'/%3E%3Cpath d='M45 58V16l6.5-10L58 16v42z' fill='%2322D3EE'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css?v=3">
+    <style>
+        .pagina { padding: 110px 0 80px; }
+        .pagina h1 { font-size: clamp(28px, 4.4vw, 42px); font-weight: 800; letter-spacing: -0.02em; margin: 14px 0 8px; }
+        .grade { display: grid; grid-template-columns: 380px minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 30px; }
+        .painel { padding: 24px; display: grid; gap: 14px; position: sticky; top: 90px; max-height: calc(100vh - 110px); overflow: auto; }
+        .painel h2 { font-size: 15px; margin: 8px 0 0; font-family: var(--mono); color: var(--ciano); letter-spacing: .08em; text-transform: uppercase; }
+        .campo { display: grid; gap: 5px; font-size: 13px; font-weight: 600; }
+        .campo input, .campo select, .campo textarea { font: inherit; font-weight: 400; color: var(--texto); background: rgba(255, 255, 255, .05); border: 1px solid var(--linha); border-radius: 10px; padding: 10px 12px; width: 100%; }
+        .campo select option { background: #0A1430; }
+        .campo input:focus, .campo select:focus, .campo textarea:focus { outline: none; border-color: var(--ciano); }
+        .dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .dica { font-size: 12px; color: var(--cinza); margin: 0; }
+        .acoes-contrato { display: grid; gap: 10px; margin-top: 6px; }
+
+        /* O contrato em si (papel branco, pronto pra virar PDF) */
+        .papel { background: #FFFFFF; color: #1A1F2C; border-radius: 6px; padding: 56px 60px; font-family: Georgia, 'Times New Roman', serif; font-size: 14.5px; line-height: 1.7; box-shadow: 0 30px 80px rgba(0, 0, 0, .45); }
+        .papel .cab { display: flex; align-items: center; gap: 12px; border-bottom: 2px solid #0B1E4A; padding-bottom: 16px; margin-bottom: 24px; font-family: 'Sora', sans-serif; }
+        .papel .cab svg { width: 38px; height: 38px; }
+        .papel .cab b { display: block; font-size: 16px; color: #0B1E4A; }
+        .papel .cab small { font-size: 10px; letter-spacing: .3em; color: #2563EB; }
+        .papel h2 { font-family: 'Sora', sans-serif; text-align: center; font-size: 17px; letter-spacing: .04em; margin: 0 0 22px; color: #0B1E4A; }
+        .papel h3 { font-family: 'Sora', sans-serif; font-size: 13.5px; margin: 22px 0 6px; color: #0B1E4A; text-transform: uppercase; letter-spacing: .04em; }
+        .papel p { margin: 0 0 8px; text-align: justify; }
+        .papel table { width: 100%; border-collapse: collapse; margin: 8px 0 10px; font-size: 13.5px; }
+        .papel td { border: 1px solid #CBD5E1; padding: 7px 10px; }
+        .papel td:last-child { text-align: right; white-space: nowrap; }
+        .papel .v { background: #EEF4FF; padding: 0 3px; border-radius: 3px; }
+        .papel .assin { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 50px; text-align: center; font-size: 13px; }
+        .papel .assin div { border-top: 1px solid #1A1F2C; padding-top: 8px; }
+        .papel .rodape-doc { margin-top: 30px; font-size: 11.5px; color: #64748B; text-align: center; font-family: 'Sora', sans-serif; }
+
+        @media (max-width: 960px) { .grade { grid-template-columns: minmax(0, 1fr); } .painel { position: static; max-height: none; } .papel { padding: 30px 22px; } }
+
+        @media print {
+            @page { size: A4; margin: 16mm 16mm; }
+            body { background: #FFFFFF !important; }
+            #rede, .aurora, .ruido, .cursor-luz, .topo, .painel, .pagina > .container > :not(.grade), .whats { display: none !important; }
+            .pagina { padding: 0; }
+            .grade { display: block; margin: 0; }
+            .papel { box-shadow: none; border-radius: 0; padding: 0; font-size: 12.5px; }
+            .papel h3 { break-after: avoid; }
+            .papel .v { background: none; padding: 0; }
+            .papel .assin { break-inside: avoid; }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="rede" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"></div>
+    <div class="ruido" aria-hidden="true"></div>
+    <div class="cursor-luz" aria-hidden="true"></div>
+
+    <header class="topo">
+        <div class="container">
+            <a class="marca" href="index.html" aria-label="Studio Evolution Tech, voltar ao início">
+                <svg viewBox="0 0 64 64" aria-hidden="true"><rect x="6" y="38" width="13" height="20" rx="3.5" fill="#1E3A8A"/><rect x="25.5" y="26" width="13" height="32" rx="3.5" fill="#3B82F6"/><path d="M45 58V16l6.5-10L58 16v42z" fill="#22D3EE"/></svg>
+                <span><small>STUDIO</small><b>Evolution Tech</b></span>
+            </a>
+        </div>
+    </header>
+
+    <main class="pagina">
+        <div class="container">
+            <span class="etiqueta">Uso interno</span>
+            <h1>Gerador de contrato</h1>
+            <p class="dica" style="max-width:640px">Preencha os dados do cliente: o contrato ao lado se monta sozinho. Depois toque em <b>Baixar PDF</b> (escolha "Salvar como PDF") e suba o arquivo na Autentique para o cliente assinar pelo celular. Seus dados ficam guardados neste aparelho.</p>
+
+            <div class="grade">
+                <form class="painel vidro" id="form" autocomplete="off">
+                    <h2>// Você (contratado)</h2>
+                    <label class="campo">Nome completo<input id="c-nome" value="Arnold Suheth"></label>
+                    <div class="dupla">
+                        <label class="campo">CPF<input id="c-doc" placeholder="000.000.000-00"></label>
+                        <label class="campo">Cidade/UF<input id="c-cidade" placeholder="Vitória/ES"></label>
+                    </div>
+                    <label class="campo">Endereço<input id="c-end" placeholder="Rua, número, bairro"></label>
+
+                    <h2>// Cliente (contratante)</h2>
+                    <label class="campo">Nome completo ou razão social<input id="k-nome" placeholder="Ex.: Mariana Souza"></label>
+                    <div class="dupla">
+                        <label class="campo">CPF ou CNPJ<input id="k-doc"></label>
+                        <label class="campo">WhatsApp<input id="k-tel" placeholder="(27) 99999-9999"></label>
+                    </div>
+                    <label class="campo">E-mail<input id="k-email" type="email"></label>
+                    <label class="campo">Endereço<input id="k-end"></label>
+                    <label class="campo">Nome do negócio<input id="k-negocio" placeholder="Ex.: Ateliê Flor de Linho"></label>
+
+                    <h2>// O que foi fechado</h2>
+                    <label class="campo">Site<select id="site"></select></label>
+                    <label class="campo">Adicionais (opcional)<input id="ad-desc" placeholder="Ex.: Página adicional + 10 produtos"></label>
+                    <label class="campo">Valor dos adicionais (R$)<input id="ad-valor" type="number" min="0" step="0.01" value="0"></label>
+                    <label class="campo">Manutenção mensal<select id="plano"></select></label>
+                    <div class="dupla">
+                        <label class="campo">Vencimento (dia)<input id="dia" type="number" min="1" max="28" value="10"></label>
+                        <label class="campo">Prazo (dias úteis)<input id="prazo" type="number" min="1" value="15"></label>
+                    </div>
+                    <label class="campo">Forma de pagamento<input id="pagto" value="Pix ou cartão"></label>
+                    <label class="campo">Data do contrato<input id="data" type="date"></label>
+
+                    <div class="acoes-contrato">
+                        <button class="botao botao-ciano" type="button" id="pdf"><b>Baixar PDF</b></button>
+                        <a class="botao botao-contorno" href="https://www.autentique.com.br/" target="_blank" rel="noopener"><b>Abrir a Autentique</b></a>
+                        <button class="botao botao-azul" type="button" id="limpar"><b>Limpar dados do cliente</b></button>
+                    </div>
+                    <p class="dica">Este modelo é um ponto de partida. Vale mostrar a um advogado antes de usar com muitos clientes.</p>
+                </form>
+
+                <article class="papel" id="papel"></article>
+            </div>
+        </div>
+    </main>
+
+    <script src="efeitos.js?v=3"></script>
+    <script>
+        const SITES = [
+            { id: 'start', nome: 'Start', preco: 249.90, desc: '1 (uma) página com apresentação, fotos, serviços, botão de WhatsApp, mapa e redes sociais, adaptada para celular' },
+            { id: 'catalogo', nome: 'Catálogo', preco: 399.90, desc: 'até 3 (três) páginas e até 15 (quinze) produtos, com botão de compra pelo WhatsApp, efeitos e selos de status' },
+            { id: 'loja', nome: 'Loja', preco: 599.90, desc: 'até 5 (cinco) páginas e até 30 (trinta) produtos, com sacola de compras, pedido pelo WhatsApp, filtros, zoom nas fotos e música' },
+            { id: 'loja-completa', nome: 'Loja Completa', preco: 899.90, desc: 'tudo do pacote Loja, mais identidade visual (logo e cores), produtos ilimitados e foto de perfil e capas de destaques para o Instagram' }
+        ];
+        const PLANOS = [
+            { id: 'nenhum', nome: 'Sem manutenção', preco: 0, desc: '' },
+            { id: 'essencial', nome: 'Essencial', preco: 59.90, desc: 'site no ar e seguro, 1 (uma) alteração simples por mês e suporte pelo WhatsApp' },
+            { id: 'plus', nome: 'Plus', preco: 99.90, desc: 'até 4 (quatro) alterações por mês, troca de até 10 (dez) produtos ou fotos e relatório mensal de visitas' },
+            { id: 'pro', nome: 'Pro', preco: 149.90, desc: 'alterações pequenas sem limite, 1 (um) banner ou promoção nova por mês, perfil no Google Maps e atendimento prioritário' },
+            { id: 'premium', nome: 'Premium', preco: 249.90, desc: 'tudo do plano Pro, mais 8 (oito) artes por mês para o Instagram e 1 (uma) seção nova no site a cada 3 (três) meses' }
+        ];
+        const $ = id => document.getElementById(id);
+        const real = v => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const v = (x, vazio) => `<span class="v">${x || vazio || '__________'}</span>`;
+        $('site').innerHTML = SITES.map(s => `<option value="${s.id}">${s.nome} · ${real(s.preco)}</option>`).join('');
+        $('plano').innerHTML = PLANOS.map(p => `<option value="${p.id}">${p.nome}${p.preco ? ' · ' + real(p.preco) + '/mês' : ''}</option>`).join('');
+        $('site').value = new URLSearchParams(location.search).get('site') || 'loja';
+        $('plano').value = new URLSearchParams(location.search).get('plano') || 'essencial';
+        $('data').value = new Date().toISOString().slice(0, 10);
+
+        /* guarda os SEUS dados neste aparelho */
+        const MEUS = ['c-nome', 'c-doc', 'c-cidade', 'c-end'];
+        try { const g = JSON.parse(localStorage.getItem('contrato-meus') || '{}'); MEUS.forEach(k => { if (g[k]) $(k).value = g[k]; }); } catch (e) { }
+        const guardar = () => { try { localStorage.setItem('contrato-meus', JSON.stringify(Object.fromEntries(MEUS.map(k => [k, $(k).value])))); } catch (e) { } };
+
+        function extenso(d) { const [a, m, dd] = d.split('-'); const meses = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro']; return `${+dd} de ${meses[+m - 1]} de ${a}`; }
+
+        function montar() {
+            guardar();
+            const s = SITES.find(x => x.id === $('site').value), p = PLANOS.find(x => x.id === $('plano').value);
+            const ad = Math.max(0, +$('ad-valor').value || 0), adDesc = $('ad-desc').value.trim();
+            const gratis = s.id === 'start' && p.id === 'premium';
+            const precoSite = gratis ? 0 : s.preco, total = precoSite + ad;
+            const cidade = $('c-cidade').value.trim() || 'Vitória/ES';
+            const temPlano = p.preco > 0;
+            let n = 0; const cl = t => `<h3>Cláusula ${++n}ª · ${t}</h3>`;
+
+            $('papel').innerHTML = `
+            <div class="cab"><svg viewBox="0 0 64 64"><rect x="6" y="38" width="13" height="20" rx="3.5" fill="#1E3A8A"/><rect x="25.5" y="26" width="13" height="32" rx="3.5" fill="#3B82F6"/><path d="M45 58V16l6.5-10L58 16v42z" fill="#22D3EE"/></svg><div><small>STUDIO</small><b>Evolution Tech</b></div></div>
+            <h2>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE CRIAÇÃO DE SITE${temPlano ? ' E MANUTENÇÃO MENSAL' : ''}</h2>
+
+            <p><b>CONTRATADO:</b> ${v($('c-nome').value)}, inscrito no CPF sob o nº ${v($('c-doc').value)}, residente em ${v($('c-end').value)}, ${v(cidade)}, que atua sob o nome comercial <b>Studio Evolution Tech</b>.</p>
+            <p><b>CONTRATANTE:</b> ${v($('k-nome').value)}, inscrito(a) no CPF/CNPJ sob o nº ${v($('k-doc').value)}, com endereço em ${v($('k-end').value)}, e-mail ${v($('k-email').value)} e WhatsApp ${v($('k-tel').value)}${$('k-negocio').value.trim() ? `, responsável pelo negócio <b>${$('k-negocio').value.trim()}</b>` : ''}.</p>
+            <p>As partes acima têm entre si justo e contratado o seguinte:</p>
+
+            ${cl('Do objeto')}
+            <p>O CONTRATADO criará para o CONTRATANTE um site no pacote <b>${s.nome}</b>, que inclui ${s.desc}${adDesc ? `, com os seguintes adicionais: ${adDesc}` : ''}.${temPlano ? ` Após a publicação, o CONTRATADO prestará o serviço de manutenção mensal no plano <b>${p.nome}</b>, que inclui ${p.desc}.` : ''}</p>
+
+            ${cl('Dos valores e do pagamento')}
+            <table>
+                <tr><td>Site ${s.nome}${gratis ? ' (cortesia do plano Premium)' : ''}</td><td>${gratis ? 'R$ 0,00' : real(s.preco)}</td></tr>
+                ${ad ? `<tr><td>Adicionais${adDesc ? ': ' + adDesc : ''}</td><td>${real(ad)}</td></tr>` : ''}
+                <tr><td><b>Total da criação do site</b></td><td><b>${real(total)}</b></td></tr>
+                ${temPlano ? `<tr><td>Manutenção mensal · plano ${p.nome}</td><td>${real(p.preco)}/mês</td></tr>` : ''}
+            </table>
+            ${total > 0 ? `<p>O valor da criação do site será pago em duas partes iguais: <b>50% (${real(total / 2)})</b> na assinatura deste contrato e <b>50% (${real(total / 2)})</b> na entrega do site publicado, por ${v($('pagto').value)}.</p>` : '<p>Não há valor a pagar pela criação do site, que é concedido como cortesia do plano Premium, nos termos da cláusula de manutenção.</p>'}
+            ${temPlano ? `<p>A mensalidade de manutenção começa a contar a partir da publicação do site e vence todo dia ${v($('dia').value)} de cada mês.</p>` : ''}
+
+            ${cl('Do prazo de entrega')}
+            <p>O site será entregue em até <b>${v($('prazo').value)} dias úteis</b>, contados a partir do pagamento da entrada e do recebimento de todo o conteúdo necessário (textos, fotos, logo, preços e dados dos produtos). Atrasos no envio do conteúdo ou na aprovação adiam o prazo pelo mesmo período.</p>
+
+            ${cl('Das obrigações do contratante')}
+            <p>O CONTRATANTE se compromete a fornecer o conteúdo do site, garantindo que tem o direito de usar todos os textos, fotos, marcas e imagens enviados, e a responder às solicitações de aprovação em até 5 (cinco) dias úteis.</p>
+
+            ${cl('Dos ajustes antes da publicação')}
+            <p>Estão incluídas até 2 (duas) rodadas de ajustes sobre a prévia do site antes da publicação. Alterações que mudem o escopo contratado serão orçadas à parte.</p>
+
+            ${cl('Da hospedagem e do domínio')}
+            <p>A hospedagem do site e o registro e a renovação do domínio próprio (ex.: seunegocio.com.br) ficam a cargo e por conta do CONTRATADO enquanto houver plano de manutenção ativo. O domínio será registrado em nome do CONTRATANTE. Encerrada a manutenção, o CONTRATANTE passa a ser responsável pela renovação do domínio e pela hospedagem.</p>
+
+            ${temPlano ? `${cl('Da manutenção mensal e da fidelidade')}
+            <p>O plano de manutenção tem <b>fidelidade mínima de 6 (seis) meses</b>, contados a partir da publicação do site. Após esse período, o plano se renova automaticamente a cada mês e pode ser cancelado a qualquer momento, sem multa, com aviso de 30 (trinta) dias.</p>
+            <p>Se o CONTRATANTE cancelar antes de completar os 6 (seis) meses, pagará multa de <b>50% (cinquenta por cento) do valor das mensalidades que faltarem</b> para completar a fidelidade.${gratis ? ' Por se tratar do plano Premium com site Start como cortesia, essa multa substitui a cobrança do site.' : ''}</p>
+            <p>Em caso de atraso no pagamento, incidirão multa de 2% (dois por cento) e juros de 1% (um por cento) ao mês. Após 15 (quinze) dias de atraso, o CONTRATADO poderá suspender os serviços de manutenção até a regularização.</p>
+            <p>Alterações não incluídas no plano contratado serão orçadas à parte.</p>` : ''}
+
+            ${cl('Da propriedade')}
+            <p>Após a quitação integral da criação do site, o CONTRATANTE passa a ser dono do site e de todo o seu conteúdo. O CONTRATADO poderá exibir o site em seu portfólio e redes sociais, sem divulgar dados sigilosos do CONTRATANTE.</p>
+
+            ${cl('Da desistência')}
+            <p>Se o CONTRATANTE desistir depois do início do trabalho, o valor da entrada não será devolvido, por remunerar o trabalho já realizado. Se a desistência ocorrer antes de qualquer trabalho iniciado, a entrada será devolvida integralmente.</p>
+
+            ${cl('Da proteção de dados')}
+            <p>As partes se comprometem a tratar os dados pessoais trocados neste contrato somente para a sua execução, conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
+
+            ${cl('Da assinatura e do foro')}
+            <p>As partes concordam com a assinatura deste contrato por meio eletrônico, que tem a mesma validade da assinatura em papel. Fica eleito o foro da comarca de ${v(cidade)} para resolver qualquer questão sobre este contrato.</p>
+
+            <p style="margin-top:22px">${v(cidade)}, ${extenso($('data').value || new Date().toISOString().slice(0, 10))}.</p>
+            <div class="assin"><div>${$('c-nome').value || 'CONTRATADO'}<br><small>Studio Evolution Tech · CONTRATADO</small></div><div>${$('k-nome').value || 'CONTRATANTE'}<br><small>CONTRATANTE</small></div></div>
+            <p class="rodape-doc">Documento gerado pelo Studio Evolution Tech · assinado eletronicamente</p>`;
+            document.title = `Contrato · ${$('k-nome').value || 'cliente'} · Studio Evolution Tech`;
+        }
+        $('form').addEventListener('input', montar);
+        $('form').addEventListener('change', montar);
+        $('pdf').addEventListener('click', () => { montar(); window.print(); });
+        $('limpar').addEventListener('click', () => { ['k-nome', 'k-doc', 'k-tel', 'k-email', 'k-end', 'k-negocio', 'ad-desc'].forEach(k => $(k).value = ''); $('ad-valor').value = 0; montar(); });
+        montar();
+    </script>
+</body>
+
+</html>

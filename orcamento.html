@@ -93,12 +93,12 @@
         <div class="container">
             <span class="etiqueta">Orçamento grátis</span>
             <h1>Monte o site do seu negócio</h1>
-            <p style="color:var(--cinza);max-width:620px;margin:0">Escolha o pacote, marque o que quiser a mais e veja o valor na hora. No final, toque no botão verde: o orçamento chega pra gente no WhatsApp.</p>
+            <p style="color:var(--cinza);max-width:620px;margin:0">Escolha o site, marque o que quiser a mais e veja o valor na hora. No final, toque no botão verde: o orçamento chega pra gente no WhatsApp.</p>
 
             <div class="grade">
                 <form id="form" novalidate>
                     <div class="bloco">
-                        <h2><span>1/4</span>Escolha o pacote</h2>
+                        <h2><span>1/4</span>Escolha o site</h2>
                         <div class="opcoes-pacote" id="pacotes"></div>
                     </div>
                     <div class="bloco">
@@ -108,6 +108,7 @@
                     </div>
                     <div class="bloco">
                         <h2><span>3/4</span>Manutenção mensal</h2>
+                        <p class="nota">Fidelidade de 6 meses. Domínio próprio por nossa conta. 🎁 No Premium, o site Start sai de graça.</p>
                         <div class="lista" id="planos"></div>
                     </div>
                     <div class="bloco">
@@ -149,19 +150,15 @@
         const WHATSAPP = '5527999998911';
 
         const PACOTES = [
-            { id: 'start', nome: 'START', sub: 'Presença Digital', preco: 399, inclui: 'Página simples, WhatsApp, localização e versão pra celular. Até 3 seções.' },
-            { id: 'essencial', nome: 'ESSENCIAL', sub: 'Site Profissional', preco: 699, inclui: 'Tudo do Start + visual personalizado, galeria, contato e SEO básico.' },
-            { id: 'business', nome: 'BUSINESS', sub: 'Catálogo Comercial', preco: 999, inclui: 'Tudo do Essencial + catálogo de até 12 produtos com compra pelo WhatsApp.' },
-            { id: 'premium', nome: 'PREMIUM', sub: 'Experiência de Marca', preco: 1599, inclui: 'Tudo do Business + até 25 produtos, identidade caprichada e animações.' }
+            { id: 'start', nome: 'START', sub: 'Página de apresentação', preco: 249.90, inclui: '1 página completa: fotos, apresentação, serviços, WhatsApp, mapa e redes.' },
+            { id: 'catalogo', nome: 'CATÁLOGO', sub: 'Produtos com compra no WhatsApp', preco: 399.90, inclui: 'Até 3 páginas e 15 produtos com botão COMPRAR, efeitos e selos.' },
+            { id: 'loja', nome: 'LOJA', sub: 'Loja com sacola de compras', preco: 599.90, inclui: 'Até 5 páginas e 30 produtos, sacola, filtros, zoom nas fotos e música.' },
+            { id: 'loja-completa', nome: 'LOJA COMPLETA', sub: 'Sua marca do zero', preco: 899.90, inclui: 'Tudo da Loja + logo e cores, produtos ilimitados e perfil do Instagram.' }
         ];
 
         const ADICIONAIS = [
-            ['Botão flutuante de WhatsApp', 49],
-            ['Mapa do Google no site', 49],
             ['Galeria extra de fotos', 79],
-            ['Botão de compra com mensagem personalizada', 79],
             ['Banner personalizado', 99],
-            ['Configuração do domínio (seunegocio.com.br)', 99],
             ['Animações e efeitos extras', 119],
             ['Formulário que envia os contatos', 149],
             ['Página adicional', 149],
@@ -173,16 +170,19 @@
 
         const PLANOS = [
             { id: 'nenhum', nome: 'Sem manutenção', preco: 0, desc: 'Eu mesmo cuido depois da entrega' },
-            { id: 'cuidado', nome: 'CUIDADO', preco: 59, desc: 'Verificação mensal, correções pequenas e 1 alteração simples' },
-            { id: 'atualizacao', nome: 'ATUALIZAÇÃO', preco: 119, desc: 'Até 3 alterações por mês, troca de banners e verificação técnica' },
-            { id: 'comercial', nome: 'COMERCIAL', preco: 199, desc: 'Até 6 alterações por mês, 10 produtos, banners e acompanhamento' }
+            { id: 'essencial', nome: 'ESSENCIAL', preco: 59.90, desc: 'Site no ar e seguro, 1 alteração simples por mês e suporte' },
+            { id: 'plus', nome: 'PLUS', preco: 99.90, desc: 'Até 4 alterações por mês, 10 produtos ou fotos e relatório de visitas' },
+            { id: 'pro', nome: 'PRO', preco: 149.90, desc: 'Alterações pequenas sem limite, 1 banner por mês e Google Maps' },
+            { id: 'premium', nome: 'PREMIUM', preco: 249.90, desc: 'Tudo do Pro + 8 artes por mês pro Instagram · SITE START GRÁTIS' }
         ];
 
-        const real = v => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: Number.isInteger(v) ? 0 : 2, maximumFractionDigits: 2 });
+        const real = v => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
         /* Se veio de um botão "Escolher" do site, já marca aquele pacote */
         const pedido = new URLSearchParams(location.search).get('pacote');
-        const inicial = PACOTES.some(p => p.id === pedido) ? pedido : 'business';
+        const inicial = PACOTES.some(p => p.id === pedido) ? pedido : 'loja';
+        const planoPedido = new URLSearchParams(location.search).get('plano');
+        const planoInicial = ['essencial', 'plus', 'pro', 'premium'].includes(planoPedido) ? planoPedido : 'nenhum';
 
         document.getElementById('pacotes').innerHTML = PACOTES.map(p => `
             <label class="op-pacote" for="pac-${p.id}">
@@ -200,7 +200,7 @@
 
         document.getElementById('planos').innerHTML = PLANOS.map(p => `
             <label class="item" for="pl-${p.id}">
-                <input type="radio" name="plano" id="pl-${p.id}" value="${p.id}" ${p.id === 'nenhum' ? 'checked' : ''}>
+                <input type="radio" name="plano" id="pl-${p.id}" value="${p.id}" ${p.id === planoInicial ? 'checked' : ''}>
                 <span>${p.nome}<small>${p.desc}</small></span>
                 <span class="v">${p.preco ? real(p.preco) + '/mês' : '—'}</span>
             </label>`).join('');
@@ -209,10 +209,12 @@
             const pac = PACOTES.find(p => p.id === document.querySelector('input[name=pacote]:checked').value);
             const ads = [...document.querySelectorAll('#adicionais input:checked')].map(c => ADICIONAIS[+c.value]);
             const plano = PLANOS.find(p => p.id === document.querySelector('input[name=plano]:checked').value);
-            const total = pac.preco + ads.reduce((s, a) => s + a[1], 0);
+            const startGratis = plano.id === 'premium' && pac.id === 'start';
+            const precoSite = startGratis ? 0 : pac.preco;
+            const total = precoSite + ads.reduce((s, a) => s + a[1], 0);
 
             document.getElementById('linhas').innerHTML =
-                `<div class="linha"><span>Pacote ${pac.nome}</span><span>${real(pac.preco)}</span></div>` +
+                `<div class="linha"><span>Site ${pac.nome}</span><span>${startGratis ? 'GRÁTIS 🎁' : real(pac.preco)}</span></div>` +
                 (ads.length ? ads.map(a => `<div class="linha"><span>${a[0]}</span><span>+ ${real(a[1])}</span></div>`).join('')
                     : '<div class="linha"><span>Sem adicionais</span><span></span></div>');
             document.getElementById('total').textContent = real(total);
@@ -220,7 +222,7 @@
                 `<span>Entrada (50%) <b>${real(total / 2)}</b></span><span>Na entrega (50%) <b>${real(total / 2)}</b></span>`;
             const mensal = document.getElementById('mensal');
             mensal.hidden = !plano.preco;
-            mensal.textContent = plano.preco ? `+ ${real(plano.preco)}/mês de manutenção (${plano.nome})` : '';
+            mensal.textContent = plano.preco ? `+ ${real(plano.preco)}/mês de manutenção (${plano.nome}) · fidelidade de 6 meses · domínio por nossa conta` : '';
 
             const nome = document.getElementById('nome').value.trim();
             const negocio = document.getElementById('negocio').value.trim();
@@ -230,12 +232,12 @@
                 nome ? 'Nome: ' + nome : '',
                 negocio ? 'Negócio: ' + negocio : '',
                 '',
-                `Pacote: ${pac.nome} (${pac.sub}) – ${real(pac.preco)}`,
+                `Site: ${pac.nome} (${pac.sub}) – ${startGratis ? 'GRÁTIS com o plano Premium' : real(pac.preco)}`,
                 ads.length ? 'Adicionais:\n' + ads.map(a => `• ${a[0]} – ${real(a[1])}`).join('\n') : 'Adicionais: nenhum',
                 '',
                 `TOTAL DO SITE: ${real(total)}`,
                 `(50% na contratação: ${real(total / 2)} · 50% na entrega: ${real(total / 2)})`,
-                'Manutenção: ' + (plano.preco ? `${plano.nome} – ${real(plano.preco)}/mês` : 'sem manutenção'),
+                'Manutenção: ' + (plano.preco ? `${plano.nome} – ${real(plano.preco)}/mês (fidelidade de 6 meses)` : 'sem manutenção'),
                 obs ? '\nSobre o projeto: ' + obs : ''
             ];
             const texto = linhas.filter((l, i) => l !== '' || (i > 0 && linhas[i - 1] !== '')).join('\n').trim();
