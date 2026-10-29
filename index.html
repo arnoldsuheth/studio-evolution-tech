@@ -66,13 +66,13 @@
         @keyframes correr { to { transform: translateX(-50%); } }
 
         /* ===== PACOTES ===== */
-        .pacotes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .pacotes { align-items: start; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
         .pacote { display: flex; flex-direction: column; gap: 12px; padding: 28px 24px; }
         .pacote .nome { font-family: var(--mono); font-size: 13px; letter-spacing: .2em; color: var(--ciano); }
         .pacote .para { margin: 0; font-size: 14px; color: var(--cinza); min-height: 44px; }
         .pacote .preco { font-size: 38px; font-weight: 800; letter-spacing: -0.03em; color: #FFFFFF; }
         .pacote .preco small { font-size: 14px; color: var(--cinza); font-weight: 400; }
-        .pacote ul { margin: 0; padding: 0; list-style: none; font-size: 14px; color: var(--cinza); display: grid; gap: 9px; flex: 1; }
+        .pacote ul { margin: 0; padding: 0; list-style: none; font-size: 14px; color: var(--cinza); display: grid; gap: 9px; align-content: start; }
         .pacote li::before { content: "✓"; color: var(--ciano); margin-right: 10px; font-weight: 700; }
         .pacote .botao { margin-top: 10px; width: 100%; }
         .pacote .exemplo { font-family: var(--mono); font-size: 12px; color: var(--claro); text-decoration: none; }
