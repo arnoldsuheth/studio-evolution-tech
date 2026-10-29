@@ -128,3 +128,7 @@ h2 .grad, h1 .grad { background: linear-gradient(90deg, var(--ciano), var(--azul
     *, *::before, *::after { animation: none !important; transition: none !important; }
     .revelar { opacity: 1; transform: none; filter: none; }
 }
+
+
+/* Compact commercial sections */
+section{padding-top:64px;padding-bottom:64px}.pacote .nota-prazo{font-size:12px;color:var(--claro);line-height:1.7;margin:16px 0}.pacote ul{margin-bottom:16px}.extras p+p{margin-top:12px}@media(max-width:640px){section{padding-top:40px;padding-bottom:40px}.pacotes{gap:18px}.pacote{padding:24px}.pacote li{line-height:1.65}}
