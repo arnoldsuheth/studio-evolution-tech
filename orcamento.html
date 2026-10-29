@@ -108,10 +108,10 @@
                     </div>
                     <div class="bloco">
                         <h2><span>3/4</span>Manutenção mensal</h2>
-                        <p class="nota">Fidelidade de 6 meses. Domínio próprio por nossa conta. 🎁 No Premium, o site Start sai de graça.</p>
+                        <p class="nota">Fidelidade de 6 meses. Domínio .com.br conforme disponibilidade no Registro.br. 🎁 No Premium, a criação do Site Catálogo está incluída.</p>
                         <div class="lista" id="planos"></div>
                     </div>
-                    <div class="bloco">
+                    <div class="bloco"><p class="nota">Os 7 dias de assistência da Marca Completa seguem os limites do Plus: até 4 alterações simples e 10 trocas de produtos ou fotos durante o período, sem relatório mensal antecipado. Começam na entrega aprovada. Não renovam automaticamente nem se acumulam com outras ofertas. A contratação mensal e sua data inicial são combinadas separadamente.</p></div><div class="bloco">
                         <h2><span>4/4</span>Seus dados</h2>
                         <div class="campos">
                             <label class="campo" for="nome">Seu nome<input id="nome" type="text" autocomplete="name" placeholder="Ex.: Mariana"></label>
@@ -132,7 +132,7 @@
                     <button class="botao copiar" id="copiar" type="button">Copiar o orçamento</button>
                     <p class="aviso" id="aviso"></p>
                     <textarea id="texto-copia" rows="6" readonly hidden></textarea>
-                    <p class="aviso">Se o WhatsApp não abrir: <b style="user-select:all">(27) 99999-8911</b></p>
+                    <p class="aviso">Se o WhatsApp não abrir, copie o orçamento e envie na conversa com o Studio.</p>
                 </aside>
             </div>
         </div>
@@ -140,7 +140,7 @@
 
     <footer class="rodape">
         <div class="container">
-            <span>Valores promocionais de entrada. Domínio, hospedagem paga e ferramentas de terceiros são combinados à parte.</span>
+            <span>Domínio .com.br e hospedagem incluídos, mediante disponibilidade no Registro.br. Renovação, prazo e ferramentas de terceiros são detalhados na proposta. Proposta válida por 1 mês.</span>
             <span>© 2026 Studio Evolution Tech</span>
         </div>
     </footer>
@@ -149,38 +149,27 @@
         /* ===== A TABELA DE PREÇOS: mude aqui quando a tabela do Notion mudar ===== */
         const WHATSAPP = '5527999998911';
 
-        const PACOTES = [
-            { id: 'start', nome: 'START', sub: 'Página de apresentação', preco: 249.90, inclui: '1 página completa: fotos, apresentação, serviços, WhatsApp, mapa e redes.' },
-            { id: 'catalogo', nome: 'CATÁLOGO', sub: 'Produtos com compra no WhatsApp', preco: 399.90, inclui: 'Até 3 páginas e 15 produtos com botão COMPRAR, efeitos e selos.' },
-            { id: 'loja', nome: 'LOJA', sub: 'Loja com sacola de compras', preco: 599.90, inclui: 'Até 5 páginas e 30 produtos, sacola, filtros, zoom nas fotos e música.' },
-            { id: 'loja-completa', nome: 'LOJA COMPLETA', sub: 'Sua marca do zero', preco: 899.90, inclui: 'Tudo da Loja + logo e cores, produtos ilimitados e perfil do Instagram.' }
-        ];
+        const PACOTES = [{"id": "smart", "nome": "SITE SMART", "sub": "Para começar na internet com confiança e credibilidade.", "preco": 299.9, "inclui": "2 páginas · Apresentação e serviços · Botão de WhatsApp e redes sociais · Domínio .com.br e hospedagem incluídos, mediante disponibilidade no Registro.br · Adaptado para celular e computador · Prazo estimado: 5 dias úteis."}, {"id": "catalogo", "nome": "SITE CATÁLOGO", "sub": "Mostre seus produtos ou serviços e venda pelo WhatsApp e pelas redes sociais.", "preco": 399.9, "inclui": "Até 3 páginas · Até 15 produtos cadastrados · Botão comprar em cada produto · Efeitos e animações · Selos de lançamento e esgotado · Apresentação e serviços · Botão de WhatsApp e redes sociais · Domínio .com.br e hospedagem incluídos, mediante disponibilidade no Registro.br · Adaptado para celular e computador · Prazo estimado: 7 dias úteis."}, {"id": "loja", "nome": "LOJA PRO", "sub": "Sua loja com sacola, pagamentos e gestão simplificada.", "preco": 599.9, "inclui": "Até 5 páginas · Até 30 produtos cadastrados · Plataforma de pagamento configurada na conta do cliente · Sacola/carrinho e pedido pronto para WhatsApp · Filtros e zoom nas fotos · Música no site · Botão comprar em cada produto · Efeitos e animações · Selos de lançamento e esgotado · Apresentação e serviços · Botão de WhatsApp e redes sociais · Domínio .com.br e hospedagem incluídos, mediante disponibilidade no Registro.br · Adaptado para celular e computador · Sistema de gestão simplificado · Prazo estimado: 10 dias úteis."}, {"id": "loja-completa", "nome": "MARCA COMPLETA", "sub": "Sua marca do zero, pronta para vender.", "preco": 899.9, "inclui": "Até 10 páginas · Até 50 produtos cadastrados · Identidade visual: logo e cores · Plataforma de pagamento configurada na conta do cliente · Sacola/carrinho e pedido pronto para WhatsApp · Filtros e zoom nas fotos · Música no site · Botão comprar em cada produto · Efeitos e animações · Selos de lançamento e esgotado · Apresentação e serviços · Botão de WhatsApp e redes sociais · Domínio .com.br e hospedagem incluídos, mediante disponibilidade no Registro.br · Adaptado para celular e computador · Sistema de gestão simplificado · 7 dias de assistência e suporte no padrão Plus, sem renovação automática · Prazo estimado: 15 dias úteis."}];
 
         const ADICIONAIS = [
             ['Galeria extra de fotos', 79],
             ['Banner personalizado', 99],
             ['Animações e efeitos extras', 119],
-            ['Formulário que envia os contatos', 149],
+            ['Formulário que envia os contratos', 149],
             ['Página adicional', 149],
             ['Mais 10 produtos no catálogo', 149],
-            ['Tratamento de 10 imagens', 149],
+            
             ['SEO inicial aprimorado (aparecer no Google)', 199],
             ['Página de campanha ou promoção', 249]
         ];
 
-        const PLANOS = [
-            { id: 'nenhum', nome: 'Sem manutenção', preco: 0, desc: 'Eu mesmo cuido depois da entrega' },
-            { id: 'essencial', nome: 'ESSENCIAL', preco: 59.90, desc: 'Site no ar e seguro, 1 alteração simples por mês e suporte' },
-            { id: 'plus', nome: 'PLUS', preco: 99.90, desc: 'Até 4 alterações por mês, 10 produtos ou fotos e relatório de visitas' },
-            { id: 'pro', nome: 'PRO', preco: 149.90, desc: 'Alterações pequenas sem limite, 1 banner por mês e Google Maps' },
-            { id: 'premium', nome: 'PREMIUM', preco: 249.90, desc: 'Tudo do Pro + 8 artes por mês pro Instagram · SITE START GRÁTIS' }
-        ];
+        const PLANOS = [{"id": "nenhum", "nome": "Sem manutenção", "preco": 0, "desc": "Condições de continuidade e renovação combinadas na proposta"}, {"id": "essencial", "nome": "ESSENCIAL", "preco": 59.9, "desc": "Publicação e manutenção técnica do site · 2 alterações simples por mês · Suporte pelo WhatsApp; horário e prazo de atendimento informados na proposta"}, {"id": "plus", "nome": "PLUS", "preco": 79.9, "desc": "4 alterações simples por mês · Troca de até 10 produtos ou fotos por mês · Relatório mensal de visitas, após configurar a medição · Suporte pelo WhatsApp"}, {"id": "pro", "nome": "PRO", "preco": 129.9, "desc": "8 alterações simples por mês · 8 alterações de banner ou promoção por mês · Troca de até 40 produtos ou fotos por mês · Perfil no Google Maps, conforme elegibilidade e validação do cliente · Suporte com prioridade pelo WhatsApp"}, {"id": "premium", "nome": "PREMIUM", "preco": 249.9, "desc": "Tudo do plano Pro · 15 artes por mês para Instagram, publicadas somente após aprovação · 1 seção nova no site a cada 3 meses · Criação do Site Catálogo sem custo com este plano (fidelidade de 6 meses)"}];
 
         const real = v => 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
         /* Se veio de um botão "Escolher" do site, já marca aquele pacote */
         const pedido = new URLSearchParams(location.search).get('pacote');
-        const inicial = PACOTES.some(p => p.id === pedido) ? pedido : 'loja';
+        const inicial = PACOTES.some(p => p.id === pedido) ? pedido : pedido==='start'?'smart':'smart';
         const planoPedido = new URLSearchParams(location.search).get('plano');
         const planoInicial = ['essencial', 'plus', 'pro', 'premium'].includes(planoPedido) ? planoPedido : 'nenhum';
 
@@ -207,14 +196,14 @@
 
         function atualizar() {
             const pac = PACOTES.find(p => p.id === document.querySelector('input[name=pacote]:checked').value);
-            const ads = [...document.querySelectorAll('#adicionais input:checked')].map(c => ADICIONAIS[+c.value]);
+            const ads = [...document.querySelectorAll('#adicionais input:checked')].map(c => ADICIONAIS[+c.value]).filter(a=>!(pac.id==='loja-completa'&&/logo|identidade/i.test(a[0])));
             const plano = PLANOS.find(p => p.id === document.querySelector('input[name=plano]:checked').value);
-            const startGratis = plano.id === 'premium' && pac.id === 'start';
-            const precoSite = startGratis ? 0 : pac.preco;
+            const catalogoGratis = plano.id === 'premium' && pac.id === 'catalogo';
+            const precoSite = catalogoGratis ? 0 : pac.preco;
             const total = precoSite + ads.reduce((s, a) => s + a[1], 0);
 
             document.getElementById('linhas').innerHTML =
-                `<div class="linha"><span>Site ${pac.nome}</span><span>${startGratis ? 'GRÁTIS 🎁' : real(pac.preco)}</span></div>` +
+                `<div class="linha"><span>Site ${pac.nome}</span><span>${catalogoGratis ? 'GRÁTIS 🎁' : real(pac.preco)}</span></div>` +
                 (ads.length ? ads.map(a => `<div class="linha"><span>${a[0]}</span><span>+ ${real(a[1])}</span></div>`).join('')
                     : '<div class="linha"><span>Sem adicionais</span><span></span></div>');
             document.getElementById('total').textContent = real(total);
@@ -232,10 +221,12 @@
                 nome ? 'Nome: ' + nome : '',
                 negocio ? 'Negócio: ' + negocio : '',
                 '',
-                `Site: ${pac.nome} (${pac.sub}) – ${startGratis ? 'GRÁTIS com o plano Premium' : real(pac.preco)}`,
+                `Site: ${pac.nome} (${pac.sub}) – ${catalogoGratis ? 'GRÁTIS com o plano Premium' : real(pac.preco)}`,
                 ads.length ? 'Adicionais:\n' + ads.map(a => `• ${a[0]} – ${real(a[1])}`).join('\n') : 'Adicionais: nenhum',
                 '',
                 `TOTAL DO SITE: ${real(total)}`,
+                'Escopo: '+pac.inclui,
+                'Validade: 1 mês a partir da proposta enviada pelo Studio.',
                 `(50% na contratação: ${real(total / 2)} · 50% na entrega: ${real(total / 2)})`,
                 'Manutenção: ' + (plano.preco ? `${plano.nome} – ${real(plano.preco)}/mês (fidelidade de 6 meses)` : 'sem manutenção'),
                 obs ? '\nSobre o projeto: ' + obs : ''
@@ -267,3 +258,4 @@
 </body>
 
 </html>
+
